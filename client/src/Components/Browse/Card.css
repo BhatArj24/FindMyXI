@@ -1,0 +1,60 @@
+.boxContainer{
+    margin: auto;
+    margin-top: 1%;
+    position:relative;
+    width:500px;
+    height:60px;
+    border: 4px solid #355cdc;
+    padding: 0px 10px;
+    border-radius: 50px;
+}
+
+.elementsContainer{
+    width:100%;
+    height:100%;
+    vertical-align: middle;
+}
+
+.search{
+    border:none;
+    height: 100%;
+    width: 100%;
+    padding : 0px 5px;
+    border-radius: 50px;
+    font-size: 18px;
+    color: #424242;
+    font-weight: 500;
+}
+
+.search:focus{
+    outline: none;
+}
+.material-icons{
+    font-size:26;
+    color: #424242;
+}
+
+.image-container {
+    width: 100%;
+    height: 75%;
+    text-align: center;
+    margin-top: auto;
+  }
+  
+  .image-circle {
+    /* border-radius: 50%; */
+    width: 100%;
+    height: 100%;
+    margin-top: 7%;
+  }
+
+  .card-header {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+ .stats{
+    font-size: 18px;
+    font-weight: bold;
+  } 

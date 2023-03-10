@@ -1,0 +1,14 @@
+
+#saveBtn{
+    width: 10%;
+    height: 50px;
+    background: #355cdc;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
