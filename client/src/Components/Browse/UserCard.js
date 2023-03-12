@@ -11,6 +11,13 @@ const UserCard = ({player}) => {
     const pickPlayer = (e) => {
       e.preventDefault();
       // send info to browse page to display alert
+      
+      if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat && !player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
+        alert("Sent Request to "+player.name);
+        return;
+      } else{
+        alert("Player is already picked");
+      }
     }
     
     useEffect(() => {
