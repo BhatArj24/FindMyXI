@@ -2,18 +2,39 @@ import React from 'react';
 import './Card.css';
 // import profilePic from '../Images/VK.jpg';
 import {Card, Image, Row, Col,Table} from 'react-bootstrap';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Alert  from 'react-bootstrap/Alert';
 
 const UserCard = ({player}) => {
+    const [manager,setManager] = useState();
     const pickPlayer = (e) => {
-        e.preventDefault();
-        var managerId = localStorage.getItem("userId");
-        if(managerId===null){
-            alert("Please login to pick a player");
-            return;
-        }
-        console.log("player picked");
+      e.preventDefault();
+      // send info to browse page to display alert
     }
 
+    
+    useEffect(() => {
+      const getManager = async () => {
+        var managerId = localStorage.getItem("userId");
+        if(managerId===null){
+          alert("Please login to pick a player");
+          return;
+        }
+        try{
+          const url = "http://localhost:8080/api/profile/"+managerId;
+          const {data: res} = await axios.get(url);
+          setManager(res.data);
+          console.log(manager);
+        }
+        catch(err){
+          console.log(err);
+        }
+      }
+      getManager();
+
+    }, []);
+    
     return (
     <Card style={{width:"50%",margin:"auto",marginTop:"3%"}}>
       <Card.Body>
