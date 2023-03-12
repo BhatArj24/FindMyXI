@@ -4,20 +4,41 @@ import './Card.css';
 import {Card, Image, Row, Col,Table} from 'react-bootstrap';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Alert  from 'react-bootstrap/Alert';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const UserCard = ({player}) => {
     const [manager,setManager] = useState();
+    const [show, setShow] = useState(false);
+    const [pickSat, setPickSat] = useState(false);
+    const [pickSun, setPickSun] = useState(false);
     const pickPlayer = (e) => {
       e.preventDefault();
-      // send info to browse page to display alert
-      
       if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat && !player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
-        alert("Sent Request to "+player.name);
-        return;
+        if(pickSat){
+          if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
+            alert("You have already sent an alert for Saturday");
+          } else{
+            manager.alerts.push({name:player.name,day:"Saturday",id:player._id});
+            player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName});
+            alert("Sent Request to "+player.name);
+          }
+        }
+        if(pickSun){
+          if(manager.alerts.find(alert => alert.day==="Sunday" && alert.id===player._id)){
+            alert("You have already sent an alert for Sunday");
+          } else{
+            manager.alerts.push({name:player.name,day:"Sunday",id:player._id});
+            player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName});
+            alert("Sent Request to "+player.name);
+          } 
+        }
       } else{
         alert("Player is already picked");
       }
+      saveChanges("player");
+      saveChanges("manager");
+      setShow(false);
     }
     
     useEffect(() => {
@@ -40,7 +61,55 @@ const UserCard = ({player}) => {
       getManager();
     }, []);
     
+    const saveChanges = async (type) => {
+      console.log("trying to save");
+      if(type==="manager"){
+        console.log("trying to save manager");
+        try{
+          const url = "http://localhost:8080/api/setup";
+          const { data: res } = await axios.post(url, manager);
+          setShow(false);
+        } catch(err){
+          console.log(err);
+        }
+      }
+      else{
+        console.log("trying to save player");
+        try{
+          const url = "http://localhost:8080/api/setup";
+          const { data: res } = await axios.post(url, player);
+          setShow(false);
+        } catch(err){
+          console.log(err);
+        }
+      }
+    }
+
+
+
     return (
+      <section>
+      <Modal show={show} onHide={()=>setShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Set Availability</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Pick for Saturday?</p>
+                    <Button variant="success" onClick={()=>setPickSat(true)}>Yes</Button>
+                    <Button variant="danger" onClick={()=>setPickSat(false)}>No</Button>
+                    <p>Pick for Sunday?</p>
+                    <Button variant="success" onClick={()=>setPickSun(true)}>Yes</Button>
+                    <Button variant="danger" onClick={()=>setPickSun(false)}>No</Button>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={pickPlayer}> Save Changes </Button>
+
+                    <Button variant="danger" onClick={()=>setShow(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+          
     <Card style={{width:"50%",margin:"auto",marginTop:"3%"}}>
       <Card.Body>
         <Row>
@@ -119,12 +188,13 @@ const UserCard = ({player}) => {
       </Card.Body>
 
       <Card.Footer>
-        <button className="btn btn-primary" onClick={pickPlayer} style={{marginLeft:"43%",backgroundColor:"#355cdc"}}>
+        <button className="btn btn-primary" onClick={()=>setShow(true)} style={{marginLeft:"43%",backgroundColor:"#355cdc"}}>
           Pick Player
         </button>
       </Card.Footer>
 
     </Card>
+    </section>
     );
 };
 

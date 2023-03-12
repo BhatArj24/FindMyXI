@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
     availableSat : { type: Boolean},
     availableSun : { type: Boolean},
     alerts : { type: Array},
+    pickedPlayers : { type: Array},
 });
 
 userSchema.methods.generateAuthToken = function () {

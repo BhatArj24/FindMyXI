@@ -17,6 +17,7 @@ const ProfileSetupManager = () => {
     teamName: "",
     phoneNumber: 0,
     alerts: [],
+    pickedPlayers: [],
 	});
   const uploadImage = (id)=>{
     console.log(id);
