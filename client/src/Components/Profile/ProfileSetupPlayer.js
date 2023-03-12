@@ -30,7 +30,8 @@ const ProfileSetupPlayer = () => {
     primaryTeamPickedSun: false,
     secondaryTeamPickedSun: false,
     availableSat: false,
-    availableSun: false
+    availableSun: false,
+    alerts: [],
 	});
   const uploadImage = (id)=>{
     console.log(id);
