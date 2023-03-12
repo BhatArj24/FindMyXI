@@ -8,7 +8,6 @@ import axios from 'axios';
 const Browse = () => {
     const [players,setPlayers] = useState();
     const [searchValue, setSearchValue] = useState("");
-
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
     };
@@ -32,7 +31,7 @@ const Browse = () => {
 
     const renderUsers = players
   ? players.map((player) => (
-        player.role.toLowerCase().includes(searchValue.toLowerCase()) && <UserCard key={player._id} player={player} />
+        player.role.toLowerCase().includes(searchValue.toLowerCase()) && <UserCard key={player._id} player={player}/>
     ))
   : null;
 

@@ -12,7 +12,6 @@ const UserCard = ({player}) => {
       e.preventDefault();
       // send info to browse page to display alert
     }
-
     
     useEffect(() => {
       const getManager = async () => {
@@ -32,7 +31,6 @@ const UserCard = ({player}) => {
         }
       }
       getManager();
-
     }, []);
     
     return (
