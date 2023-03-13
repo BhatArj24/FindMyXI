@@ -67,6 +67,7 @@ const Profile = () => {
     return (
         <section>
             <NavBar/>
+            {/* Add in alerts.js code here(don't add the component) */}
             <Modal show={availabilityShow} onHide={()=>setAvailabilityShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Set Availability</Modal.Title>

@@ -19,8 +19,8 @@ const UserCard = ({player}) => {
           if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
             alert("You have already sent an alert for Saturday");
           } else{
-            manager.alerts.push({name:player.name,day:"Saturday",id:player._id});
-            player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName});
+            manager.alerts.push({name:player.name,day:"Saturday",id:player._id,status:"Pending"});
+            player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName,status:"Pending"});
             alert("Sent Request to "+player.name);
           }
         }
@@ -28,8 +28,8 @@ const UserCard = ({player}) => {
           if(manager.alerts.find(alert => alert.day==="Sunday" && alert.id===player._id)){
             alert("You have already sent an alert for Sunday");
           } else{
-            manager.alerts.push({name:player.name,day:"Sunday",id:player._id});
-            player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName});
+            manager.alerts.push({name:player.name,day:"Sunday",id:player._id,status:"Pending"});
+            player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName,status:"Pending"});
             alert("Sent Request to "+player.name);
           } 
         }
