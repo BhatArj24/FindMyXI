@@ -14,6 +14,10 @@ const UserCard = ({player}) => {
     const [pickSun, setPickSun] = useState(false);
     const pickPlayer = (e) => {
       e.preventDefault();
+      if(manager===null || manager===undefined){
+        alert("Please login to pick a player");
+        return;
+      }
       if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat && !player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
         if(pickSat){
           if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
@@ -45,7 +49,6 @@ const UserCard = ({player}) => {
       const getManager = async () => {
         var managerId = localStorage.getItem("userId");
         if(managerId===null){
-          alert("Please login to pick a player");
           return;
         }
         try{
