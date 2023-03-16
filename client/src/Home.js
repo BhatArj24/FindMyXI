@@ -7,7 +7,6 @@ const Home = () => {
     return (
         <section>
             <NavBar/>
-            <Alert type={"teamRequest"} teamRequest={"Arjun"} />
             <div>
                 <img src={logo} style={{height:"10%",width:"50%",margin:"auto", display:"block", marginTop:"5%"}}></img>
             </div>
