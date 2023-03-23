@@ -25,6 +25,7 @@ const Profile = () => {
   const { nextSaturday, nextSunday } = getNextSaturdayAndSunday();
   const saturdayStr = nextSaturday.toLocaleDateString();
   const sundayStr = nextSunday.toLocaleDateString();
+  const [manager, setManager] = useState(null);
 
   const getProfile = async () => {
     const userId = localStorage.getItem("userId");
@@ -61,6 +62,15 @@ const Profile = () => {
       console.log(err);
     }
   };
+  const saveChangesPlayer = async () => {
+    try {
+      const url = "http://localhost:8080/api/setup";
+      const { data: res } = await axios.post(url, profile);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   return (
     <section>
@@ -89,6 +99,12 @@ const Profile = () => {
                   <button
                     className="btn btn-success"
                     style={{ marginRight: "5%" }}
+                    onClick={() => {
+                      alert.status = "Accepted";
+                      // set alert status of manager to accepted and add to picked players
+                      setProfile({ ...profile, alerts: profile.alerts });
+                      saveChangesPlayer();
+                    }}
                   >
                     Accept
                   </button>

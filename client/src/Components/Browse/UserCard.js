@@ -18,14 +18,17 @@ const UserCard = ({player}) => {
         alert("Please login to pick a player");
         return;
       }
+      console.log(manager);
       if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat && !player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
         if(pickSat){
           if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
+            console.log(alert)
             alert("You have already sent an alert for Saturday");
           } else{
             manager.alerts.push({name:player.name,day:"Saturday",id:player._id,status:"Pending"});
             player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName,status:"Pending"});
             alert("Sent Request to "+player.name);
+            // pickSat = false;
           }
         }
         if(pickSun){
@@ -35,6 +38,7 @@ const UserCard = ({player}) => {
             manager.alerts.push({name:player.name,day:"Sunday",id:player._id,status:"Pending"});
             player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName,status:"Pending"});
             alert("Sent Request to "+player.name);
+            // pickSun = false;
           } 
         }
       } else{
@@ -194,6 +198,8 @@ const UserCard = ({player}) => {
         <button className="btn btn-primary" onClick={()=>setShow(true)} style={{marginLeft:"43%",backgroundColor:"#355cdc"}}>
           Pick Player
         </button>
+        <button onClick={()=> console.log(manager)}>j</button>
+
       </Card.Footer>
 
     </Card>
