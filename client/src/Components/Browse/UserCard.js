@@ -187,13 +187,13 @@ const UserCard = ({player}) => {
       <tbody>
         <tr>
           <td>{player.primaryTeam}</td>
-          {player.availableSat && <td style={{backgroundColor: (player.primaryTeamPickedSat ? "green" : "red")}}></td>}
-          {player.availableSun && <td style={{backgroundColor: (player.primaryTeamPickedSun ? "green" : "red")}}></td>}
+          {player.availableSat && <td style={{backgroundColor: (player.primaryTeamPickedSat ? "green" : "white")}}></td>}
+          {player.availableSun && <td style={{backgroundColor: (player.primaryTeamPickedSun ? "green" : "white")}}></td>}
         </tr>
         <tr>
           <td>Other</td>
-          {player.availableSat && <td style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "red")}}></td>}
-          {player.availableSun && <td style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "red")}}></td>}
+          {player.availableSat && <td style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}></td>}
+          {player.availableSun && <td style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}></td>}
         </tr>
       </tbody>
     </Table>
