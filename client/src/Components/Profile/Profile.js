@@ -8,6 +8,7 @@ import "./ProfilePage.css";
 import pic from "./VK.jpg";
 import { Image } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import toast, { Toaster } from "react-hot-toast";
 
 const getNextSaturdayAndSunday = () => {
   const today = new Date();
@@ -53,9 +54,12 @@ const Profile = () => {
   useEffect(() => {
     if (manager !== null) {
       manager.alerts.forEach((managerAlert) => {
-        // check if alert is also the correct day 
         if (managerAlert.id === profile._id && managerAlert.day === currentAlert.day ) {
           managerAlert.status = passStatus;
+          if(passStatus === "Accepted"){
+            manager.pickedPlayers.push(profile);
+            setManager({ ...manager, pickedPlayers: manager.pickedPlayers });
+          }
           setManager({ ...manager, alerts: manager.alerts });
           saveChangesManager(currentAlert.id);
           setManager(null);
@@ -72,7 +76,7 @@ const Profile = () => {
       const url = "http://localhost:8080/api/setup";
       const { data: res } = await axios.post(url, profile);
       setAvailabilityShow(false);
-      alert("Changes Saved");
+      toast.success("Changes Saved");
     } catch (err) {
       console.log(err);
     }
@@ -109,6 +113,19 @@ const Profile = () => {
   const acceptTeamRequest = async (alert) => {
     alert.status = "Accepted";
     // need to change value for picked on saturday and sunday
+    if(alert.day === "Saturday"){
+      if(alert.teamName === profile.primaryTeam){
+        setProfile({...profile, primaryTeamPickedSat: true})
+      }else{
+        setProfile({...profile, secondaryTeamPickedSat: true,secondaryTeamSat: alert.teamName})
+      }
+    }else{
+      if(alert.teamName === profile.primaryTeam){
+        setProfile({...profile, primaryTeamPickedSun: true})
+      }else{
+        setProfile({...profile, secondaryTeamPickedSun: true,secondaryTeamSun: alert.teamName})
+      }
+    }
     setPassStatus("Accepted");
     setCurrentAlert(alert);
     setProfile({ ...profile, alerts: profile.alerts });
@@ -127,6 +144,7 @@ const Profile = () => {
   return (
     <section>
       <NavBar />
+      <Toaster />
       {profile !== null && profile.isPlayer  ? (
         profile.alerts.map((alert) => {
           if (alert.status === "Pending") {
@@ -357,6 +375,70 @@ const Profile = () => {
               </div>
             )}
             {/* If isPlayer is false, show all pickedPlayers */}
+            {profile.isPlayer === false ? (
+              <div>
+                <h3 style={{ marginTop: "1%" }}>Picked Players: </h3>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Age</th>
+                      <th>Phone Number</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {profile.pickedPlayers.map((player) => {
+                      return (
+                        <tr>
+                          <td>{player.name}</td>
+                          <td>{player.role}</td>
+                          <td>{player.age}</td>
+                          <td>{player.phoneNumber}</td>
+                          <td>{player.email}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              </div>
+            ) : (
+              <div>
+                <h3 style={{ marginTop: "1%" }}>My Teams: </h3>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Day</th>
+                      <th>Team Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Saturday</td>
+                      <td>
+                      {profile.primaryTeamPickedSat ? (
+                        <td>{profile.primaryTeam}</td>
+                      ) : (
+                        <td>{profile.secondaryTeamSat}</td>
+                      )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Sunday</td>
+                      <td>
+                      {profile.primaryTeamPickedSun ? (
+                        <td>{profile.primaryTeam}</td>
+                      ) : (
+                        <td>{profile.secondaryTeamSun}</td>
+                      )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            )}
+
             <Button
               variant="danger"
               onClick={logOut}

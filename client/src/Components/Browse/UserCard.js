@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const UserCard = ({player}) => {
     const [manager,setManager] = useState();
@@ -16,7 +18,7 @@ const UserCard = ({player}) => {
     const pickPlayer = (e) => {
       e.preventDefault();
       if(manager===null || manager===undefined){
-        alert("Please login to pick a player");
+        toast.error("You must be logged into a manager account to pick a player");
         return;
       }
       console.log(manager);
@@ -24,29 +26,30 @@ const UserCard = ({player}) => {
         if(pickSat){
           if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
             console.log(alert)
-            alert("You have already sent an alert for Saturday");
+            toast.error("You have already sent a request to "+player.name+" for Saturday");
+
           } else{
             manager.alerts.push({name:player.name,day:"Saturday",id:player._id,status:"Pending"});
             player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName,status:"Pending"});
-            alert("Sent Request to "+player.name);
+            toast.success("Sent Request to "+player.name+" for Saturday");
             // pickSat = false;
             // send email here
           }
         }
         if(pickSun){
           if(manager.alerts.find(alert => alert.day==="Sunday" && alert.id===player._id)){
-            alert("You have already sent an alert for Sunday");
+            toast.error("You have already sent a request to "+player.name+" for Sunday");
           } else{
             manager.alerts.push({name:player.name,day:"Sunday",id:player._id,status:"Pending"});
             player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName,status:"Pending"});
-            alert("Sent Request to "+player.name);
+            toast.success("Sent Request to "+player.name+" for Sunday");
             // pickSun = false;
             // send email here
 
           } 
         }
       } else{
-        alert("Player is already picked");
+        toast.error("Player is already picked");
       }
       saveChanges("player");
       saveChanges("manager");
@@ -100,6 +103,7 @@ const UserCard = ({player}) => {
 
     return (
       <section>
+        <Toaster />
       <Modal show={show} onHide={()=>setShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Set Availability</Modal.Title>
