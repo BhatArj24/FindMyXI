@@ -26,7 +26,8 @@ const Profile = () => {
   const saturdayStr = nextSaturday.toLocaleDateString();
   const sundayStr = nextSunday.toLocaleDateString();
   const [manager, setManager] = useState(null);
-
+  const [currentAlert, setCurrentAlert] = useState(null);
+  const [passStatus, setPassStatus] = useState(null);
   const getProfile = async () => {
     const userId = localStorage.getItem("userId");
     const url = `http://localhost:8080/api/profile/${userId}`;
@@ -48,6 +49,20 @@ const Profile = () => {
       // setDisplayAlerts(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (manager !== null) {
+      manager.alerts.forEach((managerAlert) => {
+        // check if alert is also the correct day 
+        if (managerAlert.id === profile._id && managerAlert.day === currentAlert.day ) {
+          managerAlert.status = passStatus;
+          setManager({ ...manager, alerts: manager.alerts });
+          saveChangesManager(currentAlert.id);
+          setManager(null);
+        }
+      });
+    }
+  }, [manager]);
   const logOut = () => {
     localStorage.removeItem("userId");
     navigate("/login");
@@ -70,7 +85,44 @@ const Profile = () => {
       console.log(err);
     }
   };
+  const getManager = async (id) => {
+    const url = `http://localhost:8080/api/profile/${id}`;
+    try {
+      const { data: res } = await axios.get(url);
+      setManager(res.data);
+      console.log("found manager");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  const saveChangesManager = async (id) => {
+    
+    try {
+      const url = "http://localhost:8080/api/setup";
+      const { data: res } = await axios.post(url, manager);
+      console.log("saved");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const acceptTeamRequest = async (alert) => {
+    alert.status = "Accepted";
+    // need to change value for picked on saturday and sunday
+    setPassStatus("Accepted");
+    setCurrentAlert(alert);
+    setProfile({ ...profile, alerts: profile.alerts });
+    saveChangesPlayer();
+    getManager(alert.id);
+  };
+  const declineTeamRequest = async (alert) => {
+    alert.status = "Declined";
+    setPassStatus("Declined");
+    setCurrentAlert(alert);
+    setProfile({ ...profile, alerts: profile.alerts });
+    saveChangesPlayer();
+    getManager(alert.id);
+  };
 
   return (
     <section>
@@ -100,22 +152,24 @@ const Profile = () => {
                     className="btn btn-success"
                     style={{ marginRight: "5%" }}
                     onClick={() => {
-                      alert.status = "Accepted";
-                      // set alert status of manager to accepted and add to picked players
-                      setProfile({ ...profile, alerts: profile.alerts });
-                      saveChangesPlayer();
+                      acceptTeamRequest(alert);
                     }}
                   >
                     Accept
                   </button>
-                  <button className="btn btn-danger">Decline</button>
+                  <button 
+                  className="btn btn-danger" 
+                  onClick={() => {
+                    declineTeamRequest(alert);
+                  }}
+                  >Decline</button>
                 </div>
               </div>
             );
           }
         })
       ) : (
-        <h1>no alerts</h1>
+        <div></div>
       )}
 
       <Modal show={availabilityShow} onHide={() => setAvailabilityShow(false)}>
@@ -216,7 +270,11 @@ const Profile = () => {
               <Col>Phone Number: {profile.phoneNumber}</Col>
               <Col>Email: {profile.email}</Col>
             </Row>
-            <h3 style={{ marginTop: "1%" }}>Availability: </h3>
+            
+            {/* If isPlayer is true */}
+            {profile.isPlayer === true ? (
+              <div>
+                <h3 style={{ marginTop: "1%" }}>Availability: </h3>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -249,7 +307,56 @@ const Profile = () => {
             >
               Set Availability
             </Button>
-
+            </div>
+            ) : (
+              <div>
+                {/* Display Status of alerts */}
+                <h3 style={{ marginTop: "1%" }}>Alert Status: </h3>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Day</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {profile.alerts.map((alert) => {
+                        return (
+                          <tr>
+                            <td>{alert.name}</td>
+                            <td>{alert.day}</td>
+                            {/* If status is Accepted, then make background color green */}
+                            {alert.status === "Accepted" ? (
+                              <td style={{ backgroundColor: "green", color:"white" }}>
+                                {alert.status}
+                              </td>
+                            ) : (
+                              null
+                            )}
+                            {alert.status === "Declined" ? (
+                              <td style={{ backgroundColor: "red", color:"white" }}>
+                                {alert.status}
+                              </td>
+                            ) : (
+                              null
+                            )}
+                            {alert.status === "Pending" ? (
+                              <td style={{ backgroundColor: "yellow", color:"black" }}>
+                                {alert.status}
+                              </td>
+                            ) : (
+                              null
+                            )}
+                          </tr>
+                        );
+                    })}
+                  </tbody>
+                </Table>
+            
+              </div>
+            )}
+            {/* If isPlayer is false, show all pickedPlayers */}
             <Button
               variant="danger"
               onClick={logOut}

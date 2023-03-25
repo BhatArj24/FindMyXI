@@ -7,25 +7,11 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
-
 const UserCard = ({player}) => {
     const [manager,setManager] = useState();
     const [show, setShow] = useState(false);
     const [pickSat, setPickSat] = useState(false);
     const [pickSun, setPickSun] = useState(false);
-
-    const sendEmail = (day)=>{
-      const message = {
-        to: player.email,
-        from: manager.email,
-        subject: 'Alert Request',
-        html: `<p>You have been requested by ${manager.teamName} to play a game on ${day}</p>`
-      };
-      sgMail.send(message);
-
-    }
 
     const pickPlayer = (e) => {
       e.preventDefault();
@@ -45,7 +31,6 @@ const UserCard = ({player}) => {
             alert("Sent Request to "+player.name);
             // pickSat = false;
             // send email here
-            sendEmail("Saturday");
           }
         }
         if(pickSun){
@@ -57,7 +42,6 @@ const UserCard = ({player}) => {
             alert("Sent Request to "+player.name);
             // pickSun = false;
             // send email here
-            sendEmail("Sunday");
 
           } 
         }
@@ -218,8 +202,6 @@ const UserCard = ({player}) => {
         <button className="btn btn-primary" onClick={()=>setShow(true)} style={{marginLeft:"43%",backgroundColor:"#355cdc"}}>
           Pick Player
         </button>
-        <button onClick={()=> console.log(manager)}>j</button>
-
       </Card.Footer>
 
     </Card>
