@@ -18,6 +18,7 @@ const ProfileSetupManager = () => {
     phoneNumber: 0,
     alerts: [],
     pickedPlayers: [],
+    division: "",
 	});
   const uploadImage = (id)=>{
     console.log(id);
@@ -73,6 +74,17 @@ const ProfileSetupManager = () => {
             <FormGroup>
                 <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number:</Label>
                 <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} style={{width:"30%"}} />
+            </FormGroup>
+            <FormGroup>
+              <Label for="division" style={{fontWeight:"bold"}}>Division:</Label>
+              <Input type="select" name="division" id="division" onChange={handleChange} style={{width:"30%"}}>
+                <option value=""></option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </Input>
             </FormGroup>
                 </div>
                 <div style={{padding:"15px"}}>

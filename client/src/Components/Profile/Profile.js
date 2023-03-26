@@ -56,11 +56,11 @@ const Profile = () => {
       manager.alerts.forEach((managerAlert) => {
         if (managerAlert.id === profile._id && managerAlert.day === currentAlert.day ) {
           managerAlert.status = passStatus;
-          if(passStatus === "Accepted"){
-            manager.pickedPlayers.push(profile);
-            setManager({ ...manager, pickedPlayers: manager.pickedPlayers });
-          }
           setManager({ ...manager, alerts: manager.alerts });
+          if(passStatus === "Accepted"){
+            manager.pickedPlayers.push({id: profile._id, name: profile.name, role: profile.role, age: profile.age, phoneNumber:profile.phoneNumber,email:profile.email});
+            console.log(manager)
+          }
           saveChangesManager(currentAlert.id);
           setManager(null);
         }
@@ -115,15 +115,17 @@ const Profile = () => {
     // need to change value for picked on saturday and sunday
     if(alert.day === "Saturday"){
       if(alert.teamName === profile.primaryTeam){
-        setProfile({...profile, primaryTeamPickedSat: true})
+        profile.primaryTeamPickedSat = true;
       }else{
-        setProfile({...profile, secondaryTeamPickedSat: true,secondaryTeamSat: alert.teamName})
+        profile.secondaryTeamPickedSat = true;
+        profile.secondaryTeamSat = alert.teamName;
       }
     }else{
       if(alert.teamName === profile.primaryTeam){
-        setProfile({...profile, primaryTeamPickedSun: true})
+        profile.primaryTeamPickedSun = true;
       }else{
-        setProfile({...profile, secondaryTeamPickedSun: true,secondaryTeamSun: alert.teamName})
+        profile.secondaryTeamPickedSun = true;
+        profile.secondaryTeamSun = alert.teamName;
       }
     }
     setPassStatus("Accepted");

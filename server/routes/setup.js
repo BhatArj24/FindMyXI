@@ -27,7 +27,9 @@ router.post("/",async (req,res) => {
             user.secondaryTeamPickedSun = req.body.secondaryTeamPickedSun;
             user.availableSat = req.body.availableSat;
             user.availableSun = req.body.availableSun;
+            user.pickedPlayers = req.body.pickedPlayers;
             user.alerts = req.body.alerts;
+            user.division = req.body.division;
             await user.save();
             const token = user.generateAuthToken();
             res.status(201).send({message:"User updated successfully",data:token});

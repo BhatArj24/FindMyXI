@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema({
     isPlayer: { type: Boolean},
     profilePic: { type: String},
     primaryTeam: { type: String},
-    secondaryTeamPickedSat: { type: String},
-    secondaryTeamPickedSun: { type: String},
+    secondaryTeamSat: { type: String},
+    secondaryTeamSun: { type: String},
     role: { type: String},
     phoneNumber: { type: Number},
     teamName: { type: String},
@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema({
     availableSun : { type: Boolean},
     alerts : { type: Array},
     pickedPlayers : { type: Array},
+    division : { type: String},
 });
 
 userSchema.methods.generateAuthToken = function () {
