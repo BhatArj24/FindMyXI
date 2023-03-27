@@ -71,7 +71,25 @@ const Profile = () => {
     localStorage.removeItem("userId");
     navigate("/login");
   };
-  const saveChanges = async () => {
+  const saveChanges = async (type) => {
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // Sunday is 0, Monday is 1, etc.
+    const hour = now.getHours();
+    if(type==="availability"){
+      if(dayOfWeek > 0 && (dayOfWeek < 2 || (dayOfWeek === 2 && hour < 23))) {
+        try {
+          const url = "http://localhost:8080/api/setup";
+          const { data: res } = await axios.post(url, profile);
+          setAvailabilityShow(false);
+          toast.success("Changes Saved");
+        } catch (err) {
+          console.log(err);
+        }
+      } else{
+        toast.error("You can only change availability after Sunday and before 11pm on Tuesday");
+        return;
+      }
+    }
     try {
       const url = "http://localhost:8080/api/setup";
       const { data: res } = await axios.post(url, profile);
@@ -225,7 +243,7 @@ const Profile = () => {
           </Button>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={saveChanges}>
+          <Button variant="success" onClick={()=>saveChanges("availability")}>
             {" "}
             Save Changes{" "}
           </Button>
