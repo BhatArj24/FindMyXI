@@ -4,10 +4,13 @@ import UserCard from './UserCard';
 import './Card.css';
 import {BsSearch} from 'react-icons/bs';
 import axios from 'axios';
+import './Browse.css';
 
 const Browse = () => {
     const [players,setPlayers] = useState();
     const [searchValue, setSearchValue] = useState("");
+    const [filterType, setFilterType] = useState("role");
+    
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
     };
@@ -30,12 +33,16 @@ const Browse = () => {
     };
 
     const renderUsers = players
-  ? players.map((player) => (
-        player.role.toLowerCase().includes(searchValue.toLowerCase()) && <UserCard key={player._id} player={player}/>
-    ))
+  ? players
+      .filter((player) =>
+        filterType === "name"
+          ? player.name.toLowerCase().includes(searchValue.toLowerCase())
+          : filterType === "role"
+          ? player.role.toLowerCase().includes(searchValue.toLowerCase())
+          : player.primaryTeam.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      .map((player) => <UserCard key={player._id} player={player} />)
   : null;
-
-
     return (
         <section>
             <NavBar/>
@@ -43,10 +50,17 @@ const Browse = () => {
                 <table className="elementsContainer">
                     <tr>
                         <td>
-                            <input type="text" placeholder="Search by role" className="search" value={searchValue} onChange={handleSearchChange} ></input>
+                            <input type="text" placeholder="Fliter by..." className="search" value={searchValue} onChange={handleSearchChange} ></input>
                         </td>
+
                         <td>
-                            <a href="a"><BsSearch className="material-icons"></BsSearch></a>
+                            <select className="filter" value={filterType} onChange={(e) => {
+                                setFilterType(e.target.value);
+                                }}>
+                                <option className="option" value="role">Role</option>
+                                <option className="option" value="name">Name</option>
+                                <option className="option" value="primaryTeam">Primary Team</option>
+                            </select>
                         </td>
                     </tr>
                 </table>

@@ -114,7 +114,7 @@ const UserCard = ({player}) => {
         <Toaster />
       <Modal show={show} onHide={()=>setShow(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Set Availability</Modal.Title>
+                    <Modal.Title>Request Player</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Pick for Saturday?</p>
