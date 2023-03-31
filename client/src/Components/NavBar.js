@@ -1,6 +1,6 @@
-
 import React from 'react';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
+// import {circleLogo} from './Images/'
 
 const NavBar = () => {
     return(
@@ -13,7 +13,6 @@ const NavBar = () => {
                     <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/login">Log In</Link>
                     <div className="vr h-200 mx-2 text-white"></div>
                     <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/profile">My Profile</Link>
-   
                 </nav>
             </nav>
       </header>
