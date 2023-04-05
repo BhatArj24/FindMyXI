@@ -118,16 +118,17 @@ const UserCard = ({player}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <p>Pick for Saturday?</p>
-                    <Button variant="success" onClick={()=>setPickSat(true)}>Yes</Button>
-                    <Button variant="danger" onClick={()=>setPickSat(false)}>No</Button>
+                    { /*if set pick sat, make background green or make it white with text color green*/ }
+                    <Button variant="success" style={{backgroundColor:(pickSat===true ? "green" : "white"),color:(pickSat===true ? "white" : "green")}} onClick={()=>setPickSat(true)}>Yes</Button>
+                    <Button variant="danger" style={{backgroundColor:(pickSat===false ? "red" : "white"),color:(pickSat===false ? "white" : "red")}}onClick={()=>setPickSat(false)}>No</Button>
                     <p>Pick for Sunday?</p>
-                    <Button variant="success" onClick={()=>setPickSun(true)}>Yes</Button>
-                    <Button variant="danger" onClick={()=>setPickSun(false)}>No</Button>
+                    <Button variant="success" style={{backgroundColor:(pickSun===true ? "green" : "white"),color:(pickSun===true ? "white" : "green")}} onClick={()=>setPickSun(true)}>Yes</Button>
+                    <Button variant="danger" style={{backgroundColor:(pickSun===false ? "red" : "white"),color:(pickSun===false ? "white" : "red")}} onClick={()=>setPickSun(false)}>No</Button>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" onClick={pickPlayer}> Save Changes </Button>
+                    <Button variant="success" style={{backgroundColor:"green",color:"white"}} onClick={pickPlayer}> Save Changes </Button>
 
-                    <Button variant="danger" onClick={()=>setShow(false)}>
+                    <Button variant="danger" style={{backgroundColor:"red",color:"white"}} onClick={()=>setShow(false)}>
                         Close
                     </Button>
                 </Modal.Footer>

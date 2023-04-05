@@ -8,6 +8,18 @@
     color: white;
 }
 
+@media screen and (max-width: 600px) {
+    .filter{
+        height: 75%;
+        width: 75px;
+        margin-left: 1%;
+        border-radius: 5px;
+        background-color: #355cdc;
+        border: none;
+        color: white;
+    }
+}
+
 .option{
     height: 100%;
     width: 50%;

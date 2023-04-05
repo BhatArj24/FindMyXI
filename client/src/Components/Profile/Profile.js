@@ -219,12 +219,14 @@ const Profile = () => {
           <Button
             variant="success"
             onClick={() => setProfile({ ...profile, availableSat: true })}
+            style={{backgroundColor:"green",color:"white"}}
           >
             Yes
           </Button>
           <Button
             variant="danger"
             onClick={() => setProfile({ ...profile, availableSat: false })}
+            style={{backgroundColor:"red",color:"white"}}
           >
             No
           </Button>
@@ -232,23 +234,25 @@ const Profile = () => {
           <Button
             variant="success"
             onClick={() => setProfile({ ...profile, availableSun: true })}
+            style={{backgroundColor:"green",color:"white"}}
           >
             Yes
           </Button>
           <Button
             variant="danger"
             onClick={() => setProfile({ ...profile, availableSun: false })}
+            style={{backgroundColor:"red",color:"white"}}
           >
             No
           </Button>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={()=>saveChanges("availability")}>
+          <Button variant="success" onClick={()=>saveChanges("availability")} style={{backgroundColor:"green",color:"white"}}>
             {" "}
             Save Changes{" "}
           </Button>
 
-          <Button variant="danger" onClick={() => setAvailabilityShow(false)}>
+          <Button variant="danger" onClick={() => setAvailabilityShow(false)} style={{backgroundColor:"red",color:"white"}}>
             Close
           </Button>
         </Modal.Footer>
@@ -341,7 +345,7 @@ const Profile = () => {
               variant="primary"
               onClick={() => setAvailabilityShow(true)}
               block
-              style={{ marginTop: "2%" }}
+              style={{ marginTop: "2%",backgroundColor:"blue" }}
             >
               Set Availability
             </Button>
@@ -463,7 +467,7 @@ const Profile = () => {
               variant="danger"
               onClick={logOut}
               block
-              style={{ marginTop: "2%" }}
+              style={{ marginTop: "2%",backgroundColor:"red" }}
             >
               Log out
             </Button>

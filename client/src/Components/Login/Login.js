@@ -71,7 +71,7 @@ const Login = () => {
 				<div className={styles.right}>
 					<h1 style={{marginBottom:"10%",fontWeight:"bold"}}>New Here?</h1>
 					<Link to="/register">
-						<button type="button" className={styles.white_btn}>
+						<button type="button" className={styles.green_btn} style={{backgroundColor:"white",color:"black"}}>
 							Sign Up
 						</button>
 					</Link>

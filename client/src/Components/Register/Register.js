@@ -48,7 +48,7 @@ const Register = () => {
                     <div className={styles.left}>
                         <h1 style={{marginBottom:"10%",fontWeight:"bold"}}>Registered?</h1>
                         <Link to="/login">
-                            <button type="button" className={styles.white_btn}>
+                            <button type="button" className={styles.green_btn} style={{backgroundColor:"white",color:"black"}}>
                                 Sign in
                             </button>
                         </Link>
