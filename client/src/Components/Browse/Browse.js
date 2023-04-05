@@ -65,7 +65,7 @@ const Browse = () => {
                     </tr>
                 </table>
             </div>
-            {/* <div className='flex flex-row w-full'> */}
+            {/* <div className='flex flex-row w-full mt-2'> */}
                 {renderUsers}    
             {/* </div> */}
         </section>

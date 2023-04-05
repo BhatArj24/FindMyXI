@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 const UserCard = ({player}) => {
-    const [manager,setManager] = useState();
+    const [manager,setManager] = useState(null);
     const [show, setShow] = useState(false);
     const [pickSat, setPickSat] = useState(false);
     const [pickSun, setPickSun] = useState(false);
@@ -36,10 +36,12 @@ const UserCard = ({player}) => {
                 // send email here
             }
         }
+        else{
+          toast.error("Player is already picked for Saturday")
+
+        }
       }
-      else{
-        toast.error("Player is already picked for Saturday")
-      }
+
       
         if(pickSun){
           if(!player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
@@ -54,10 +56,10 @@ const UserCard = ({player}) => {
               // pickSat = false;
               // send email here
           }
+      } else{
+        toast.error("Player is already picked for Sunday")
+
       }
-        }
-        else{
-          toast.error("Player is already picked for Sunday")
         }
       saveChanges("player");
       saveChanges("manager");
@@ -73,7 +75,9 @@ const UserCard = ({player}) => {
         try{
           const url = "http://localhost:8080/api/profile/"+managerId;
           const {data: res} = await axios.get(url);
+          if(res.data.isPlayer===false){
           setManager(res.data);
+          }
           console.log(manager);
         }
         catch(err){
