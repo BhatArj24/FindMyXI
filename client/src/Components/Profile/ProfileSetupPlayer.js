@@ -85,7 +85,7 @@ const ProfileSetupPlayer = () => {
     <section>
     <div style={{display:"flex"}}>
         <img src={logo} style={{width:"100px",height:"80px",paddingTop:"10px",paddingLeft:"20px"}} alt="a"></img>
-        <h1 style={{paddingTop:"10px",paddingLeft:"20px", fontWeight:"bold"}}>Profile Setup</h1>
+        <h1 style={{paddingTop:"10px",paddingLeft:"20px", fontWeight:"bold"}} className='text-4xl'>Profile Setup</h1>
     </div>
     <div style={{marginLeft:"40%",marginTop:"1%"}}>
           <div>

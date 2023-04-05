@@ -134,7 +134,7 @@ const UserCard = ({player}) => {
                 </Modal.Footer>
             </Modal>
           
-    <Card style={{width:"50%",margin:"auto",marginTop:"3%"}}>
+    <Card style={{width:"50%",margin:"auto",marginTop:"3%"}} /*style={{width:"500px",margin:"auto",marginTop:"3%", marginLeft:"50px"}}*/>
       <Card.Body>
         <Row>
           <Col xs={4}>
