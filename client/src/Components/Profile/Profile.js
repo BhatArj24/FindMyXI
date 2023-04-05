@@ -129,36 +129,42 @@ const Profile = () => {
     }
   };
   const acceptTeamRequest = async (alert) => {
-    alert.status = "Accepted";
-    // need to change value for picked on saturday and sunday
-    if(alert.day === "Saturday"){
-      if(alert.teamName === profile.primaryTeam){
-        profile.primaryTeamPickedSat = true;
+    var r = window.confirm("Are you sure you want to accept this request?");
+    if(r){
+      alert.status = "Accepted";
+      // need to change value for picked on saturday and sunday
+      if(alert.day === "Saturday"){
+        if(alert.teamName === profile.primaryTeam){
+          profile.primaryTeamPickedSat = true;
+        }else{
+          profile.secondaryTeamPickedSat = true;
+          profile.secondaryTeamSat = alert.teamName;
+        }
       }else{
-        profile.secondaryTeamPickedSat = true;
-        profile.secondaryTeamSat = alert.teamName;
+        if(alert.teamName === profile.primaryTeam){
+          profile.primaryTeamPickedSun = true;
+        }else{
+          profile.secondaryTeamPickedSun = true;
+          profile.secondaryTeamSun = alert.teamName;
+        }
       }
-    }else{
-      if(alert.teamName === profile.primaryTeam){
-        profile.primaryTeamPickedSun = true;
-      }else{
-        profile.secondaryTeamPickedSun = true;
-        profile.secondaryTeamSun = alert.teamName;
-      }
+      setPassStatus("Accepted");
+      setCurrentAlert(alert);
+      setProfile({ ...profile, alerts: profile.alerts });
+      saveChangesPlayer();
+      getManager(alert.id);
     }
-    setPassStatus("Accepted");
-    setCurrentAlert(alert);
-    setProfile({ ...profile, alerts: profile.alerts });
-    saveChangesPlayer();
-    getManager(alert.id);
   };
   const declineTeamRequest = async (alert) => {
-    alert.status = "Declined";
-    setPassStatus("Declined");
-    setCurrentAlert(alert);
-    setProfile({ ...profile, alerts: profile.alerts });
-    saveChangesPlayer();
-    getManager(alert.id);
+    var r = window.confirm("Are you sure you want to decline this request?");
+    if(r){
+      alert.status = "Declined";
+      setPassStatus("Declined");
+      setCurrentAlert(alert);
+      setProfile({ ...profile, alerts: profile.alerts });
+      saveChangesPlayer();
+      getManager(alert.id);
+    }
   };
 
   return (
