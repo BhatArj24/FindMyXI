@@ -7,6 +7,12 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import toast, { Toaster } from 'react-hot-toast';
+import kohli from './VK.jpg';
+import bat from './cricket-bat.png';
+import ball from './cricket-ball.png';
+import link from './link.png';
+
+
 
 
 const UserCard = ({player}) => {
@@ -136,14 +142,102 @@ const UserCard = ({player}) => {
                         Close
                     </Button>
                 </Modal.Footer>
-            </Modal>
-          
-    <Card style={{width:"50%",margin:"auto",marginTop:"3%"}} /*style={{width:"500px",margin:"auto",marginTop:"3%", marginLeft:"50px"}}*/>
+      </Modal>
+      <div className="block rounded-lg p-4 w-96 mb-10 ml-9 bg-slate-100 mt-6 hover:bg-blue-50">
+          <img
+            alt="Home"
+            src={kohli}
+            className="h-56 w-full rounded-md object-cover"
+          />
+
+          <div className="mt-2">
+            <dl>
+              <div>
+                <dt className="sr-only">Role</dt>
+
+                <dd className="text-sm text-gray-500">{player.role}: {player.battingPos}, {player.bowlingType}</dd>
+              </div>
+
+              <div>
+                <dt className="sr-only">Name</dt>
+
+                <dd className="font-medium">{player.name}</dd>
+              </div>
+            </dl>
+
+            <div className="mt-6 flex items-center gap-8 text-xs">
+              <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+                    <img src={bat} className='h-4 w-4'>
+                    </img>
+                
+                <div className="mt-1.5 sm:mt-0">
+                  <p className="text-gray-500">Batting Hand</p>
+
+                  <p className="font-medium">{player.battingHand}</p>
+                </div>
+              </div>
+
+              <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+                <img src={ball} className='h-4 w-4'>
+                </img>
+
+                <div className="mt-1.5 sm:mt-0">
+                  <p className="text-gray-500">Bowling Hand</p>
+
+                  <p className="font-medium">{player.bowlingHand}</p>
+                </div>
+              </div>
+
+              <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2 hover:bg-blue-100 hover:cursor-pointer hover:rounded-md" onClick={()=>{window.open(player.CricClubsLink)}}>
+                <img src={link} className='h-4 w-4'>
+                </img>
+
+                <div className="mt-1.5 sm:mt-0">
+                  <p className="text-gray-500">CricClubs Id</p>
+
+                  <p className="font-medium">{player.CricClubsId}</p>
+                </div>
+              </div>
+            </div>
+            <div className='mt-6 items-center'>
+                <table className='table-auto m-auto'>
+                    <thead>
+                        <tr>
+                            <th className='px-4 py-2'>Team</th>
+                            {player.availableSat && <th className='px-4 py-2'>Saturday</th>}
+                            {player.availableSun && <th className='px-4 py-2'>Sunday</th>}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className='border px-4 py-2'>{player.primaryTeam}</td>
+                            {player.availableSat && <td className='border px-4 py-2' style={{backgroundColor: (player.primaryTeamPickedSat ? "green" : "white")}}></td>}
+                            {player.availableSun && <td className='border px-4 py-2' style={{backgroundColor: (player.primaryTeamPickedSun ? "green" : "white")}}></td>}
+                        </tr>
+                        <tr className='bg-gray-100'>
+                            <td className='border px-4 py-2'>Other</td>
+                            {player.availableSat && <td className='border px-4 py-2' style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}></td>}
+                            {player.availableSun && <td className='border px-4 py-2' style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}></td>}
+                        </tr>
+
+                    </tbody>
+                </table>
+                            
+            </div>
+            <div className='mt-6 items-center'>
+                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-32' onClick={()=>setShow(true)}>
+                    Pick Player
+                </button>
+            </div>
+          </div>
+        </div>
+    {/*
+    <Card style={{width:"50%",margin:"auto",marginTop:"3%"}} style={{width:"500px",margin:"auto",marginTop:"3%", marginLeft:"50px"}}>
       <Card.Body>
         <Row>
           <Col xs={4}>
             <div className="image-container">
-            <Image /*src={imageList}*/ className="image-circle" />
+            <Image src={imageList} className="image-circle" >
             </div>
           </Col>
           <Col xs={8}>
@@ -222,6 +316,7 @@ const UserCard = ({player}) => {
       </Card.Footer>
 
     </Card>
+    */}
     </section>
     );
 };
