@@ -42,7 +42,7 @@ const ProfileSetupManager = () => {
         toast.error("Please fill all the fields");
         
       }else{
-        const url = "http://localhost:8080/api/setup";
+        const url = "https://findmyxi.onrender.com/api/setup";
 			const { data: res } = await axios.post(url, data);
             uploadImage(data._id);
 			navigate("/browse");

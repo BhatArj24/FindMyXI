@@ -103,7 +103,7 @@ const UserCard = ({player}) => {
           return;
         }
         try{
-          const url = "http://localhost:8080/api/profile/"+managerId;
+          const url = "https://findmyxi.onrender.com/api/profile/"+managerId;
           const {data: res} = await axios.get(url);
           if(res.data.isPlayer===false){
           setManager(res.data);
@@ -122,7 +122,7 @@ const UserCard = ({player}) => {
       if(type==="manager"){
 
         try{
-          const url = "http://localhost:8080/api/setup";
+          const url = "https://findmyxi.onrender.com/api/setup";
           const { data: res } = await axios.post(url, manager);
           setShow(false);
         } catch(err){
@@ -132,7 +132,7 @@ const UserCard = ({player}) => {
       else{
 
         try{
-          const url = "http://localhost:8080/api/setup";
+          const url = "https://findmyxi.onrender.com/api/setup";
           const { data: res } = await axios.post(url, player);
           setShow(false);
         } catch(err){
@@ -167,7 +167,7 @@ const UserCard = ({player}) => {
                     </Button>
                 </Modal.Footer>
       </Modal>
-      <div className="block rounded-lg p-4 w-96 mb-10 ml-9 bg-slate-100 mt-6 hover:bg-blue-50">
+      <div className="block rounded-lg p-4 w-80 mb-10 ml-9 bg-slate-100 mt-6 hover:bg-blue-50 lg:w-96">
           <Image
             alt="Profile Pic"
             src={imageList}
@@ -249,98 +249,12 @@ const UserCard = ({player}) => {
                             
             </div>
             <div className='mt-6 items-center'>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-32' onClick={()=>setShow(true)}>
+                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-8 w-48 lg:mx-16' onClick={()=>setShow(true)}>
                     Pick Player
                 </button>
             </div>
           </div>
         </div>
-    {/*
-    <Card style={{width:"50%",margin:"auto",marginTop:"3%"}} style={{width:"500px",margin:"auto",marginTop:"3%", marginLeft:"50px"}}>
-      <Card.Body>
-        <Row>
-          <Col xs={4}>
-            <div className="image-container">
-            <Image src={imageList} className="image-circle" >
-            </div>
-          </Col>
-          <Col xs={8}>
-            <Card.Title style={{fontSize:"35px"}}>{player.name}</Card.Title>
-            <Card.Subtitle>Age: {player.age}</Card.Subtitle>
-            <Card.Text style={{marginTop:"7px"}}>Role: {player.role}</Card.Text>
-            <Card.Text>Batting Hand: {player.battingHand}</Card.Text>
-            <Card.Text>Batting Position: {player.battingPos}</Card.Text>
-            <Card.Text>Bowling Hand: {player.bowlingHand}</Card.Text>
-            <Card.Text>Bowling Type: {player.bowlingType}</Card.Text>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Card.Header className="card-header">Statistics</Card.Header>
-          </Col>
-        </Row>
-        <Row style={{width:"100%",marginLeft:"10%"}}>
-          <Col xs={4}>
-            <Card.Text style={{padding:"3px",marginTop:"7px",marginBottom:"7px"}}><div className="stats">CricClubs Link: </div>{player.CricClubsLink}</Card.Text>
-          </Col>
-          <Col xs={4}>
-            <Card.Text style={{padding:"3px",marginTop:"7px",marginBottom:"7px"}}><div className="stats">CricClubs Id: </div>{player.CricClubsId}</Card.Text>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Card.Header className="card-header">Contact Information</Card.Header>
-          </Col>
-        </Row>
-        <Row style={{width:"100%",marginLeft:"5%"}}>
-          <Col xs={6}>
-            <Card.Text style={{padding:"3px",marginTop:"7px",marginBottom:"7px",marginLeft:"75px"}}><div className='stats'>Email: </div>{player.email}</Card.Text>
-          </Col>
-          <Col xs={6}>
-            <Card.Text style={{padding:"3px",marginTop:"7px",marginBottom:"0px",marginLeft:"75px"}}><div className='stats'>Phone Number: </div>{player.phoneNumber}</Card.Text>
-          </Col>
-        </Row>
-        <Row>
-  <Col xs={12}>
-    <Card.Header className="card-header">Availability</Card.Header>
-  </Col>
-</Row>
-<Row>
-  <Col xs={12}>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th></th>
-          {player.availableSat && <th>Saturday</th>}
-          {player.availableSun && <th>Sunday</th>}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{player.primaryTeam}</td>
-          {player.availableSat && <td style={{backgroundColor: (player.primaryTeamPickedSat ? "green" : "white")}}></td>}
-          {player.availableSun && <td style={{backgroundColor: (player.primaryTeamPickedSun ? "green" : "white")}}></td>}
-        </tr>
-        <tr>
-          <td>Other</td>
-          {player.availableSat && <td style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}></td>}
-          {player.availableSun && <td style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}></td>}
-        </tr>
-      </tbody>
-    </Table>
-  </Col>
-</Row>
-
-      </Card.Body>
-
-      <Card.Footer>
-        <button className="btn btn-primary" onClick={()=>setShow(true)} style={{marginLeft:"43%",backgroundColor:"#355cdc"}}>
-          Pick Player
-        </button>
-      </Card.Footer>
-
-    </Card>
-    */}
     </section>
     );
 };

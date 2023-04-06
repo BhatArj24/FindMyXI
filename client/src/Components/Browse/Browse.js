@@ -15,7 +15,7 @@ const Browse = () => {
         setSearchValue(e.target.value);
     };
     const getPlayers = async () => {
-        const url = "http://localhost:8080/api/players";
+        const url = "https://findmyxi.onrender.com/api/players";
         try{
             const res = await axios.get(url);
             setPlayers(res.data.data);
@@ -65,7 +65,7 @@ const Browse = () => {
                     </tr>
                 </table>
             </div>
-            <div className='flex flex-row w-full mt-2'>
+            <div className='flex flex-col w-full mt-2 lg:flex-row'>
                 {renderUsers}    
             </div>
         </section>

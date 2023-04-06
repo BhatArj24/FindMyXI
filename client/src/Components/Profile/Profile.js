@@ -33,7 +33,7 @@ const Profile = () => {
   const [passStatus, setPassStatus] = useState(null);
   const getProfile = async () => {
     const userId = sessionStorage.getItem("userId");
-    const url = `http://localhost:8080/api/profile/${userId}`;
+    const url = `https://findmyxi.onrender.com/api/profile/${userId}`;
     try {
       const { data: res } = await axios.get(url);
       setProfile(res.data);
@@ -90,7 +90,7 @@ const Profile = () => {
     if(type==="availability"){
       if(dayOfWeek > 0 && (dayOfWeek < 2 || (dayOfWeek === 2 && hour < 23))) {
         try {
-          const url = "http://localhost:8080/api/setup";
+          const url = "https://findmyxi.onrender.com/api/setup";
           const { data: res } = await axios.post(url, profile);
           setAvailabilityShow(false);
           toast.success("Changes Saved");
@@ -104,7 +104,7 @@ const Profile = () => {
       }
     }
     try {
-      const url = "http://localhost:8080/api/setup";
+      const url = "https://findmyxi.onrender.com/api/setup";
       const { data: res } = await axios.post(url, profile);
       setAvailabilityShow(false);
       toast.success("Changes Saved");
@@ -114,14 +114,14 @@ const Profile = () => {
   };
   const saveChangesPlayer = async () => {
     try {
-      const url = "http://localhost:8080/api/setup";
+      const url = "https://findmyxi.onrender.com/api/setup";
       const { data: res } = await axios.post(url, profile);
     } catch (err) {
       console.log(err);
     }
   };
   const getManager = async (id) => {
-    const url = `http://localhost:8080/api/profile/${id}`;
+    const url = `https://findmyxi.onrender.com/api/profile/${id}`;
     try {
       const { data: res } = await axios.get(url);
       setManager(res.data);
@@ -134,7 +134,7 @@ const Profile = () => {
   const saveChangesManager = async (id) => {
     
     try {
-      const url = "http://localhost:8080/api/setup";
+      const url = "https://findmyxi.onrender.com/api/setup";
       const { data: res } = await axios.post(url, manager);
 
     } catch (err) {

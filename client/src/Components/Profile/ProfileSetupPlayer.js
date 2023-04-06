@@ -49,7 +49,7 @@ const ProfileSetupPlayer = () => {
 		setData({ ...data, [input.name]: input.value });
 	};
   const getTeams = async () => {
-    const url = "http://localhost:8080/api/teams";
+    const url = "https://findmyxi.onrender.com/api/teams";
     try{
       const res = await axios.get(url);
       setTeams(Object.values(res.data));
@@ -65,7 +65,7 @@ const ProfileSetupPlayer = () => {
         toast.error("Please fill in all fields");
         
       } else {
-        const url = "http://localhost:8080/api/setup";
+        const url = "https://findmyxi.onrender.com/api/setup";
 			const { data: res } = await axios.post(url, data);
       uploadImage(data._id);
 			navigate("/browse");
