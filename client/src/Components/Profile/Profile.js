@@ -301,14 +301,14 @@ const Profile = () => {
           <Container>
             <Row>
               <Col>
-                <h1 style={{ fontWeight: "bold", textAlign: "center" }}>
+                <h1 style={{ fontWeight: "bold", textAlign: "center" }} className="text-4xl">
                   {profile.name}'s Profile
                 </h1>
               </Col>
             </Row>
             {profile.isPlayer === true ? (
               <div>
-              <h3 style={{ marginTop: "1%" }}>Player Details: </h3>
+              <h3 style={{ marginTop: "1%" }} className="text-3xl">Player Details: </h3>
               <Row>
               <Col>Role: {profile.role}</Col>
               <Col>Age: {profile.age}</Col>
@@ -326,10 +326,10 @@ const Profile = () => {
             </Row>
               </div>
             ) : (
-              <h3 style={{ marginTop: "1%" }}>Manager Details: </h3>
+              <h3 style={{ marginTop: "1%" }} className="text-3xl">Manager Details: </h3>
             )}
             
-            <h3 style={{ marginTop: "1%" }}>Contact Details: </h3>
+            <h3 style={{ marginTop: "1%" }} className="text-3xl">Contact Details: </h3>
             <Row>
               <Col>Phone Number: {profile.phoneNumber}</Col>
               <Col>Email: {profile.email}</Col>
@@ -337,7 +337,7 @@ const Profile = () => {
             
             {profile.isPlayer === true ? (
               <div>
-                <h3 style={{ marginTop: "1%" }}>Availability: </h3>
+                <h3 style={{ marginTop: "1%" }} className="text-3xl">Availability: </h3>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -374,7 +374,7 @@ const Profile = () => {
             ) : (
               <div>
                 {/* Display Status of alerts */}
-                <h3 style={{ marginTop: "1%" }}>Alert Status: </h3>
+                <h3 style={{ marginTop: "1%" }} className="text-3xl">Alert Status: </h3>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
@@ -422,7 +422,7 @@ const Profile = () => {
             {/* If isPlayer is false, show all pickedPlayers */}
             {profile.isPlayer === false ? (
               <div>
-                <h3 style={{ marginTop: "1%" }}>Picked Players: </h3>
+                <h3 style={{ marginTop: "1%" }} className="text-3xl">Picked Players: </h3>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
@@ -450,7 +450,7 @@ const Profile = () => {
               </div>
             ) : (
               <div>
-                <h3 style={{ marginTop: "1%" }}>My Teams: </h3>
+                <h3 style={{ marginTop: "1%" }} className="text-3xl">My Teams: </h3>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
