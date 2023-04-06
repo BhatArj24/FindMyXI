@@ -9,6 +9,8 @@ import pic from "./VK.jpg";
 import { Image } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import toast, { Toaster } from "react-hot-toast";
+import { ref, listAll, getDownloadURL } from "firebase/storage";
+import { storage } from "./firebase-config";
 
 const getNextSaturdayAndSunday = () => {
   const today = new Date();
@@ -39,14 +41,25 @@ const Profile = () => {
       console.log(err);
     }
   };
-
+  useEffect(() => {
+    if (profile !== null) {
+      const imageRef = ref(storage, `images/${profile._id}-folder/`)
+      listAll(imageRef).then((response)=>{
+        response.items.forEach((item)=>{
+          getDownloadURL(item).then((url)=>{
+            setImageList(url);
+          })
+        })
+      })
+    }
+  }, [profile]);
   useEffect(() => {
     const user = localStorage.getItem("userId");
     if (user === null) {
       navigate("/login");
     } else {
       getProfile();
-      setImageList(pic);
+      
       // setDisplayAlerts(true);
     }
   }, []);
@@ -76,19 +89,20 @@ const Profile = () => {
     const dayOfWeek = now.getDay();
     const hour = now.getHours();
     if(type==="availability"){
-      // if(dayOfWeek > 0 && (dayOfWeek < 2 || (dayOfWeek === 2 && hour < 23))) {
+      if(dayOfWeek > 0 && (dayOfWeek < 2 || (dayOfWeek === 2 && hour < 23))) {
         try {
           const url = "http://localhost:8080/api/setup";
           const { data: res } = await axios.post(url, profile);
           setAvailabilityShow(false);
           toast.success("Changes Saved");
+          return;
         } catch (err) {
           console.log(err);
         }
-      // } else{
-      //   toast.error("You can only change availability after Sunday and before 11pm on Tuesday");
-      //   return;
-      // }
+      } else{
+        toast.error("You can only change availability after Sunday and before 11pm on Tuesday");
+        return;
+      }
     }
     try {
       const url = "http://localhost:8080/api/setup";
@@ -129,10 +143,13 @@ const Profile = () => {
     }
   };
   const acceptTeamRequest = async (alert) => {
+    const now = new Date();
+    const dayOfWeek = now.getDay();
+    const hour = now.getHours();
     var r = window.confirm("Are you sure you want to accept this request?");
+    if(dayOfWeek>4 && (dayOfWeek < 5 || (dayOfWeek === 5 && hour < 17))){
     if(r){
       alert.status = "Accepted";
-      // need to change value for picked on saturday and sunday
       if(alert.day === "Saturday"){
         if(alert.teamName === profile.primaryTeam){
           profile.primaryTeamPickedSat = true;
@@ -154,6 +171,10 @@ const Profile = () => {
       saveChangesPlayer();
       getManager(alert.id);
     }
+  }else{
+    toast.error("You can only accept requests before 5pm on Friday");
+    return;
+  }
   };
   const declineTeamRequest = async (alert) => {
     var r = window.confirm("Are you sure you want to decline this request?");

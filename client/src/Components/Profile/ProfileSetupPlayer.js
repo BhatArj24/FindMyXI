@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import {storage} from '../../firebase-config';
 import {ref, uploadBytes} from 'firebase/storage';
+import toast, {Toaster} from 'react-hot-toast';
 
 const ProfileSetupPlayer = () => {
   const navigate = useNavigate();
@@ -60,12 +61,17 @@ const ProfileSetupPlayer = () => {
   const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-      console.log("trying")
-			const url = "http://localhost:8080/api/setup";
+     // check if any fields are empty
+      if(data.age === 0 || data.role === "" || data.battingHand === "" || data.battingPos === "" || data.bowlingHand === "" || data.bowlingType === "" || data.CricClubsLink === "" || data.CricClubsId === "" || data.primaryTeam === "" || data.phoneNumber === 0){
+        toast.error("Please fill in all fields");
+        
+      } else {
+        const url = "http://localhost:8080/api/setup";
 			const { data: res } = await axios.post(url, data);
       uploadImage(data._id);
 			navigate("/browse");
 			console.log(res.message);
+      }
 		} catch (error) {
 			if (
 				error.response &&
@@ -83,6 +89,7 @@ const ProfileSetupPlayer = () => {
 
   return (
     <section>
+      <Toaster/>
     <div style={{display:"flex"}}>
         <img src={logo} style={{width:"100px",height:"80px",paddingTop:"10px",paddingLeft:"20px"}} alt="a"></img>
         <h1 style={{paddingTop:"10px",paddingLeft:"20px", fontWeight:"bold"}} className='text-4xl'>Profile Setup</h1>

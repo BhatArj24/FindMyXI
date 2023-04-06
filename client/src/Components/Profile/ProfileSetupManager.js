@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import {storage} from '../../firebase-config';
 import {ref, uploadBytes} from 'firebase/storage';
+import toast, {Toaster} from 'react-hot-toast';
 
 
 const ProfileSetupManager = () => {
@@ -37,12 +38,16 @@ const ProfileSetupManager = () => {
   const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-            console.log("trying")
-			const url = "http://localhost:8080/api/setup";
+      if(data.teamName==="" || data.phoneNumber===0 || data.division===""){
+        toast.error("Please fill all the fields");
+        
+      }else{
+        const url = "http://localhost:8080/api/setup";
 			const { data: res } = await axios.post(url, data);
             uploadImage(data._id);
 			navigate("/browse");
 			console.log(res.message);
+      }
 		} catch (error) {
 			if (
 				error.response &&
@@ -56,6 +61,7 @@ const ProfileSetupManager = () => {
 	};
   return (
     <section>
+        <Toaster/>
     <div style={{display:"flex"}}>
         <img src={logo} alt="a" style={{width:"100px",height:"80px",paddingTop:"10px",paddingLeft:"20px"}}></img>
         <h1 style={{paddingTop:"10px",paddingLeft:"20px", fontWeight:"bold"}} className='text-4xl'>Profile Setup</h1>
