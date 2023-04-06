@@ -16,7 +16,7 @@ const Login = () => {
 		try {
 			const url = "http://localhost:8080/api/auth";
 			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("userId", res.data);
+			sessionStorage.setItem("userId", res.data);
 			window.location = "/";
 		} catch (error) {
 			if (
@@ -29,7 +29,7 @@ const Login = () => {
 		}
 	};
 	useEffect(() => {
-		if (localStorage.getItem("userId")) {
+		if (sessionStorage.getItem("userId")) {
 			navigate("/browse");
 		}
 	}, []);

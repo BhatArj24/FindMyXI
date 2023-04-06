@@ -13,7 +13,7 @@ const ProfileSetupManager = () => {
     const navigate = useNavigate();
   const [imageUpload, setImageUpload] = useState(null);
   const [data, setData] = useState({
-    _id: localStorage.getItem("userId"),
+    _id: sessionStorage.getItem("userId"),
     isPlayer: false,
     teamName: "",
     phoneNumber: 0,

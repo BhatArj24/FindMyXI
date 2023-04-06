@@ -99,7 +99,7 @@ const UserCard = ({player}) => {
     
     useEffect(() => {
       const getManager = async () => {
-        var managerId = localStorage.getItem("userId");
+        var managerId = sessionStorage.getItem("userId");
         if(managerId===null){
           return;
         }

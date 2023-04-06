@@ -13,7 +13,7 @@ const ProfileSetupPlayer = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [teams, setTeams] = useState([]);
   const [data, setData] = useState({
-    _id: localStorage.getItem("userId"),
+    _id: sessionStorage.getItem("userId"),
 		age: 0,
     role: "",
     battingHand: "",
@@ -23,7 +23,7 @@ const ProfileSetupPlayer = () => {
     CricClubsLink: "",
     CricClubsId: "",
     isPlayer: true,
-    primaryTeam: "",
+    primaryTeam: "None",
     secondaryTeamSat: "",
     secondaryTeamSun: "",
     phoneNumber: 0,

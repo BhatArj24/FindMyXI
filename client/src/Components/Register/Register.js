@@ -22,7 +22,7 @@ const Register = () => {
 		try {
 			const url = "http://localhost:8080/api/users";
 			const { data: res } = await axios.post(url, data);
-            localStorage.setItem("userId", res.data);
+            sessionStorage.setItem("userId", res.data);
             navigate("/profile-setup-choose");
             
 		} catch (error) {
@@ -36,7 +36,7 @@ const Register = () => {
 		}
 	};
     useEffect(() => {
-        if (localStorage.getItem("userId")) {
+        if (sessionStorage.getItem("userId")) {
             navigate("/browse");
         }
     }, []);

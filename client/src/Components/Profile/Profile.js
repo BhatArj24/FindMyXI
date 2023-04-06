@@ -32,7 +32,7 @@ const Profile = () => {
   const [currentAlert, setCurrentAlert] = useState(null);
   const [passStatus, setPassStatus] = useState(null);
   const getProfile = async () => {
-    const userId = localStorage.getItem("userId");
+    const userId = sessionStorage.getItem("userId");
     const url = `http://localhost:8080/api/profile/${userId}`;
     try {
       const { data: res } = await axios.get(url);
@@ -54,7 +54,7 @@ const Profile = () => {
     }
   }, [profile]);
   useEffect(() => {
-    const user = localStorage.getItem("userId");
+    const user = sessionStorage.getItem("userId");
     if (user === null) {
       navigate("/login");
     } else {
@@ -81,7 +81,7 @@ const Profile = () => {
     }
   }, [manager]);
   const logOut = () => {
-    localStorage.removeItem("userId");
+    sessionStorage.removeItem("userId");
     navigate("/login");
   };
   const saveChanges = async (type) => {
@@ -308,11 +308,9 @@ const Profile = () => {
               </Col>
             </Row>
             {profile.isPlayer === true ? (
+              <div>
               <h3 style={{ marginTop: "1%" }}>Player Details: </h3>
-            ) : (
-              <h3 style={{ marginTop: "1%" }}>Manager Details: </h3>
-            )}
-            <Row>
+              <Row>
               <Col>Role: {profile.role}</Col>
               <Col>Age: {profile.age}</Col>
             </Row>
@@ -326,21 +324,18 @@ const Profile = () => {
             </Row>
             <Row>
               <Col>Primary Team: {profile.primaryTeam}</Col>
-              <Col>Secondary Team: {profile.secondaryTeam}</Col>
             </Row>
-            <h3 style={{ marginTop: "1%" }}>Statistics: </h3>
-            <Row>
-              <Col>Matches Played: {profile.matches}</Col>
-              <Col>Runs: {profile.runs}</Col>
-              <Col>Wickets: {profile.wickets}</Col>
-            </Row>
+              </div>
+            ) : (
+              <h3 style={{ marginTop: "1%" }}>Manager Details: </h3>
+            )}
+            
             <h3 style={{ marginTop: "1%" }}>Contact Details: </h3>
             <Row>
               <Col>Phone Number: {profile.phoneNumber}</Col>
               <Col>Email: {profile.email}</Col>
             </Row>
             
-            {/* If isPlayer is true */}
             {profile.isPlayer === true ? (
               <div>
                 <h3 style={{ marginTop: "1%" }}>Availability: </h3>
@@ -498,14 +493,6 @@ const Profile = () => {
             >
               Log out
             </Button>
-            {/* <Button
-              variant="success"
-              onClick={() => setDisplayAlerts(true)}
-              block
-              style={{ marginTop: "2%" }}
-            >
-              Load Requests
-            </Button> */}
           </Container>
         </div>
       ) : (
