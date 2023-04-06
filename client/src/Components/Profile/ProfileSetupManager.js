@@ -22,7 +22,7 @@ const ProfileSetupManager = () => {
     division: "",
 	});
   const uploadImage = (id)=>{
-    console.log(id);
+
     if(imageUpload==null) return;
     const imageRef = ref(storage,`images/${id}`);
     uploadBytes(imageRef,imageUpload).then(() =>{
@@ -46,7 +46,7 @@ const ProfileSetupManager = () => {
 			const { data: res } = await axios.post(url, data);
             uploadImage(data._id);
 			navigate("/browse");
-			console.log(res.message);
+
       }
 		} catch (error) {
 			if (

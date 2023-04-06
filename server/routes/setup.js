@@ -3,7 +3,6 @@ const {User} = require('../models/user');
 
 router.post("/",async (req,res) => {
     try{
-        console.log(req.body);
         const user = await User.findById({_id:req.body._id});
         if(user){
             user.age = req.body.age;
@@ -36,7 +35,6 @@ router.post("/",async (req,res) => {
         } 
 
     } catch (err) {
-        console.log(err);
         res.status(500).send({message:"Internal Server Error"});
     }
 });

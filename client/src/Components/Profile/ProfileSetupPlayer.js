@@ -51,7 +51,6 @@ const ProfileSetupPlayer = () => {
   const getTeams = async () => {
     const url = "http://localhost:8080/api/teams";
     try{
-      console.log("trying");
       const res = await axios.get(url);
       setTeams(Object.values(res.data));
     } catch(error){
@@ -70,7 +69,6 @@ const ProfileSetupPlayer = () => {
 			const { data: res } = await axios.post(url, data);
       uploadImage(data._id);
 			navigate("/browse");
-			console.log(res.message);
       }
 		} catch (error) {
 			if (

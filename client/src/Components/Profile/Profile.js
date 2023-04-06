@@ -72,7 +72,6 @@ const Profile = () => {
           setManager({ ...manager, alerts: manager.alerts });
           if(passStatus === "Accepted"){
             manager.pickedPlayers.push({id: profile._id, name: profile.name, role: profile.role, age: profile.age, phoneNumber:profile.phoneNumber,email:profile.email});
-            console.log(manager)
           }
           saveChangesManager(currentAlert.id);
           setManager(null);
@@ -126,7 +125,7 @@ const Profile = () => {
     try {
       const { data: res } = await axios.get(url);
       setManager(res.data);
-      console.log("found manager");
+
     } catch (err) {
       console.log(err);
     }
@@ -137,7 +136,7 @@ const Profile = () => {
     try {
       const url = "http://localhost:8080/api/setup";
       const { data: res } = await axios.post(url, manager);
-      console.log("saved");
+
     } catch (err) {
       console.log(err);
     }

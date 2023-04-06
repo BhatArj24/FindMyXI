@@ -46,7 +46,6 @@ const UserCard = ({player}) => {
           if(player.availableSat){
             if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat){
                 if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
-                  console.log(alert)
                   toast.error("You have already sent a request to "+player.name+" for Saturday");
       
                 } else{
@@ -70,7 +69,7 @@ const UserCard = ({player}) => {
           if(player.availableSun){
             if(!player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
               if(manager.alerts.find(alert => alert.day==="Sunday" && alert.id===player._id)){
-                console.log(alert)
+
                 toast.error("You have already sent a request to "+player.name+" for Sunday");
     
               } else{
@@ -109,7 +108,7 @@ const UserCard = ({player}) => {
           if(res.data.isPlayer===false){
           setManager(res.data);
           }
-          console.log(manager);
+
         }
         catch(err){
           console.log(err);
@@ -119,9 +118,9 @@ const UserCard = ({player}) => {
     }, []);
     
     const saveChanges = async (type) => {
-      console.log("trying to save");
+
       if(type==="manager"){
-        console.log("trying to save manager");
+
         try{
           const url = "http://localhost:8080/api/setup";
           const { data: res } = await axios.post(url, manager);
@@ -131,7 +130,7 @@ const UserCard = ({player}) => {
         }
       }
       else{
-        console.log("trying to save player");
+
         try{
           const url = "http://localhost:8080/api/setup";
           const { data: res } = await axios.post(url, player);
