@@ -63,7 +63,7 @@ const Login = () => {
                             style={{marginBottom:"5%"}}
 						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
-						<button type="submit" className={styles.green_btn}>
+						<button type="submit" className={styles.green_btn} style={{backgroundColor:"#355cdc"}}>
 							Sign In
 						</button>
 					</form>

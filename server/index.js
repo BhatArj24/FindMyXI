@@ -21,6 +21,10 @@ app.use("/api/setup", setupRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/players", playerRoutes);
 app.use("/api/profile", profileRoutes);
+app.get("/", (req, res) => {
+    res.send({message:"Welcome to the Fantasy Football API"});
+});
+
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
