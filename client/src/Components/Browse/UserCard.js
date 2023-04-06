@@ -29,43 +29,53 @@ const UserCard = ({player}) => {
       }
       console.log(manager);
         if(pickSat){
-          if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat){
-              if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
-                console.log(alert)
-                toast.error("You have already sent a request to "+player.name+" for Saturday");
-    
-              } else{
-                manager.alerts.push({name:player.name,day:"Saturday",id:player._id,status:"Pending"});
-                player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName,status:"Pending"});
-                toast.success("Sent Request to "+player.name+" for Saturday");
-                // pickSat = false;
-                // send email here
-            }
+          if(player.availableSat){
+            if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat){
+                if(manager.alerts.find(alert => alert.day==="Saturday" && alert.id===player._id)){
+                  console.log(alert)
+                  toast.error("You have already sent a request to "+player.name+" for Saturday");
+      
+                } else{
+                  manager.alerts.push({name:player.name,day:"Saturday",id:player._id,status:"Pending"});
+                  player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName,status:"Pending"});
+                  toast.success("Sent Request to "+player.name+" for Saturday");
+                  // pickSat = false;
+                  // send email here
+              }
+          }
+          else{
+            toast.error("Player is already picked for Saturday")
+
+          }
         }
         else{
-          toast.error("Player is already picked for Saturday")
-
+          toast.error("Player is not available for Saturday")
         }
       }
 
       
         if(pickSun){
-          if(!player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
-            if(manager.alerts.find(alert => alert.day==="Sunday" && alert.id===player._id)){
-              console.log(alert)
-              toast.error("You have already sent a request to "+player.name+" for Sunday");
-  
+          if(player.availableSun){
+            if(!player.primaryTeamPickedSun && !player.secondaryTeamPickedSun){
+              if(manager.alerts.find(alert => alert.day==="Sunday" && alert.id===player._id)){
+                console.log(alert)
+                toast.error("You have already sent a request to "+player.name+" for Sunday");
+    
+              } else{
+                manager.alerts.push({name:player.name,day:"Sunday",id:player._id,status:"Pending"});
+                player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName,status:"Pending"});
+                toast.success("Sent Request to "+player.name+" for Sunday");
+                // pickSat = false;
+                // send email here
+            }
             } else{
-              manager.alerts.push({name:player.name,day:"Sunday",id:player._id,status:"Pending"});
-              player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName,status:"Pending"});
-              toast.success("Sent Request to "+player.name+" for Sunday");
-              // pickSat = false;
-              // send email here
-          }
-      } else{
-        toast.error("Player is already picked for Sunday")
+              toast.error("Player is already picked for Sunday")
 
-      }
+            }
+          }
+          else{
+            toast.error("Player is not available for Sunday")
+          }
         }
       saveChanges("player");
       saveChanges("manager");
