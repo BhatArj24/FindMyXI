@@ -37,7 +37,7 @@ const ProfileSetupPlayer = () => {
   const uploadImage = (id)=>{
     console.log(id);
     if(imageUpload==null) return;
-    const imageRef = ref(storage,`images/${id}`);
+    const imageRef = ref(storage,`images/${id}-folder/${id}`);
     uploadBytes(imageRef,imageUpload).then(() =>{
       alert("Image Uploaded");
     }).catch((error) => {

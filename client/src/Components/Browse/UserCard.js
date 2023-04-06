@@ -11,7 +11,8 @@ import kohli from './VK.jpg';
 import bat from './cricket-bat.png';
 import ball from './cricket-ball.png';
 import link from './link.png';
-
+import {storage} from './firebase-config';
+import {ref, listAll, getDownloadURL} from 'firebase/storage';
 
 
 
@@ -20,7 +21,17 @@ const UserCard = ({player}) => {
     const [show, setShow] = useState(false);
     const [pickSat, setPickSat] = useState(false);
     const [pickSun, setPickSun] = useState(false);
-
+    const [imageList,setImageList] = useState();
+    const imageRef = ref(storage, `images/${player._id}-folder/`)
+    useEffect(() => {
+        listAll(imageRef).then((response)=>{
+          response.items.forEach((item)=>{
+            getDownloadURL(item).then((url)=>{
+              setImageList(url);
+            })
+          })
+        })
+    },[])
     const pickPlayer = (e) => {
       e.preventDefault();
       if(manager===null || manager===undefined){
@@ -154,9 +165,9 @@ const UserCard = ({player}) => {
                 </Modal.Footer>
       </Modal>
       <div className="block rounded-lg p-4 w-96 mb-10 ml-9 bg-slate-100 mt-6 hover:bg-blue-50">
-          <img
-            alt="Home"
-            src={kohli}
+          <Image
+            alt="Profile Pic"
+            src={imageList}
             className="h-56 w-full rounded-md object-cover"
           />
 
