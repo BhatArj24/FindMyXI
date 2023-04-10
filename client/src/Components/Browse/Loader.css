@@ -1,0 +1,44 @@
+/* Loader.css */
+/* Loader.css */
+.spinner {
+    width: 100px; /* Increase the width to make it larger */
+    height: 100px; /* Increase the height to make it larger */
+    position: fixed; /* Use position: fixed to center the loader */
+    top: 50%; /* Position from the top of the viewport */
+    left: 50%; /* Position from the left of the viewport */
+    transform: translate(-50%, -50%); /* Center the loader horizontally and vertically */
+    display: grid;
+    border: 4.5px solid #0000;
+    border-radius: 50%;
+    border-color: #dbdcef #0000;
+    animation: spinner-e04l1k 1s infinite linear;
+  }
+  
+  /* ... rest of the CSS for the loader ... */
+  
+  .spinner::before,
+  .spinner::after {
+    content: "";
+    grid-area: 1/1;
+    margin: 2.2px;
+    border: inherit;
+    border-radius: 50%;
+  }
+  
+  .spinner::before {
+    border-color: #355cdc #0000;
+    animation: inherit;
+    animation-duration: 0.5s;
+    animation-direction: reverse;
+  }
+  
+  .spinner::after {
+    margin: 8.9px;
+  }
+  
+  @keyframes spinner-e04l1k {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+  

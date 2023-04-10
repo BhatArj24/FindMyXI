@@ -5,23 +5,28 @@ import './Card.css';
 import {BsSearch} from 'react-icons/bs';
 import axios from 'axios';
 import './Browse.css';
+import './Loader.css';
 
 const Browse = () => {
     const [players,setPlayers] = useState();
     const [searchValue, setSearchValue] = useState("");
     const [filterType, setFilterType] = useState("role");
-    
+    const [isLoading, setIsLoading] = useState(true);
+
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
     };
     const getPlayers = async () => {
         const url = "https://findmyxi.onrender.com/api/players";
+        setIsLoading(true);
         try{
             const res = await axios.get(url);
             setPlayers(res.data.data);
+            setIsLoading(false);
             
         } catch(error){
           console.log(error);
+          setIsLoading(false);
         }
       };
     
@@ -32,17 +37,21 @@ const Browse = () => {
         await getPlayers();
     };
 
-    const renderUsers = players
-  ? players
-      .filter((player) =>
-        filterType === "name"
-          ? player.name.toLowerCase().includes(searchValue.toLowerCase())
-          : filterType === "role"
-          ? player.role.toLowerCase().includes(searchValue.toLowerCase())
-          : player.primaryTeam.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      .map((player) => <UserCard key={player._id} player={player} />)
-  : null;
+    const renderUsers = isLoading ? (
+        <div className="spinner"></div>
+    ) : (
+        players &&
+        players
+          .filter((player) =>
+            filterType === "name"
+              ? player.name.toLowerCase().includes(searchValue.toLowerCase())
+              : filterType === "role"
+              ? player.role.toLowerCase().includes(searchValue.toLowerCase())
+              : player.primaryTeam.toLowerCase().includes(searchValue.toLowerCase())
+          )
+          .map((player) => <UserCard key={player._id} player={player} />)
+    );
+    
     return (
         <section>
             <NavBar/>
@@ -65,7 +74,7 @@ const Browse = () => {
                     </tr>
                 </table>
             </div>
-            <div className='flex flex-col w-full mt-2 lg:flex-row'>
+            <div className='flex-wrap flex flex-col w-full mt-2 lg:flex-row'>
                 {renderUsers}    
             </div>
         </section>
