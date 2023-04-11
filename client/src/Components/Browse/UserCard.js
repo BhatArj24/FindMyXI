@@ -41,7 +41,7 @@ const UserCard = ({player}) => {
         toast.error("You must be logged into a manager account to pick a player");
         return;
       }
-      if(dayOfWeek>2 && (dayOfWeek<4 || (dayOfWeek===4 && hour<17))){
+      // if(dayOfWeek>2 && (dayOfWeek<4 || (dayOfWeek===4 && hour<17))){
         if(pickSat){
           if(player.availableSat){
             if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat){
@@ -91,9 +91,9 @@ const UserCard = ({player}) => {
       saveChanges("player");
       saveChanges("manager");
       setShow(false);
-      } else{
-        toast.error("You can only request players before 5pm on Thursday");
-      }
+      // } else{
+        // toast.error("You can only request players before 5pm on Thursday and after Tuesday");
+      // }
     }
     
     useEffect(() => {
@@ -168,11 +168,15 @@ const UserCard = ({player}) => {
                 </Modal.Footer>
       </Modal>
       <div className="block rounded-lg p-4 w-80 mb-10 ml-9 bg-slate-100 mt-6 hover:bg-blue-50 lg:w-96">
-          <Image
-            alt="Profile Pic"
-            src={imageList}
-            className="h-56 w-full rounded-md object-cover"
-          />
+    
+          <div className='h-56 w-full rounded-md object-cover'>
+            <Image
+              alt="Profile Pic"
+              src={imageList}
+              style={{height:"100%",width:"100%",objectFit:"scale-down"}}
+            />
+          </div>
+          
 
           <div className="mt-2">
             <dl>
@@ -185,7 +189,7 @@ const UserCard = ({player}) => {
               <div>
                 <dt className="sr-only">Name</dt>
 
-                <dd className="font-medium">{player.name}</dd>
+                <dd className="font-medium">{player.name}, {player.age}</dd>
               </div>
             </dl>
 
