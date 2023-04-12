@@ -150,13 +150,20 @@ const Profile = () => {
     if(r){
       alert.status = "Accepted";
       if(alert.day === "Saturday"){
+        if(!profile.primaryTeamPickedSat && !profile.secondaryTeamPickedSat){
         if(alert.teamName === profile.primaryTeam){
           profile.primaryTeamPickedSat = true;
         }else{
           profile.secondaryTeamPickedSat = true;
           profile.secondaryTeamSat = alert.teamName;
         }
+      }
+      else{
+        toast.error("You have already picked a team for Saturday");
+        return;
+      }
       }else{
+        if(!profile.primaryTeamPickedSun && !profile.secondaryTeamPickedSun){
         if(alert.teamName === profile.primaryTeam){
           profile.primaryTeamPickedSun = true;
         }else{
@@ -164,6 +171,11 @@ const Profile = () => {
           profile.secondaryTeamSun = alert.teamName;
         }
       }
+      else{
+        toast.error("You have already picked a team for Sunday");
+        return;
+      }
+    }
       setPassStatus("Accepted");
       setCurrentAlert(alert);
       setProfile({ ...profile, alerts: profile.alerts });
@@ -496,7 +508,7 @@ const Profile = () => {
         </div>
       ) : (
         <div>
-        <h1>Cannot Load Profile</h1>
+        <h1>Cannot Load Profile, please reload or return to login</h1>
         <Button
               variant="danger"
               onClick={()=>{

@@ -238,14 +238,14 @@ const UserCard = ({player}) => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className='border px-4 py-2'>{player.primaryTeam}</td>
-                            {player.availableSat && <td className='border px-4 py-2' style={{backgroundColor: (player.primaryTeamPickedSat ? "green" : "white")}}></td>}
-                            {player.availableSun && <td className='border px-4 py-2' style={{backgroundColor: (player.primaryTeamPickedSun ? "green" : "white")}}></td>}
+                            <td className='border px-1 py-1 text-xs lg:px-4 lg:py-2 lg:text-base'>{player.primaryTeam}</td>
+                            {player.availableSat && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.primaryTeamPickedSat ? "green" : "white")}}></td>}
+                            {player.availableSun && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.primaryTeamPickedSun ? "green" : "white")}}></td>}
                         </tr>
                         <tr className='bg-gray-100'>
-                            <td className='border px-4 py-2'>Other</td>
-                            {player.availableSat && <td className='border px-4 py-2' style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}></td>}
-                            {player.availableSun && <td className='border px-4 py-2' style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}></td>}
+                            <td className='border px-1 py-1 lg:px-4 lg:py-2'>Other</td>
+                            {player.availableSat && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}></td>}
+                            {player.availableSun && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}></td>}
                         </tr>
 
                     </tbody>
