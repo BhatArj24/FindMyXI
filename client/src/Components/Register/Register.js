@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import NavBar from '../NavBar';
 import styles from './styles.module.css';
 import axios from 'axios';
+import "./Loader.css";
 
 const Register = () => {
     const [data, setData] = useState({
@@ -12,18 +13,20 @@ const Register = () => {
 	});
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
-
+    const [loader, setLoader] = useState(false);
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+        setLoader(true);
 		try {
 			const url = "https://findmyxi.onrender.com/api/users";
 			const { data: res } = await axios.post(url, data);
             sessionStorage.setItem("userId", res.data);
             navigate("/profile-setup-choose");
+            setLoader(false);
             
 		} catch (error) {
 			if (
@@ -33,6 +36,7 @@ const Register = () => {
 			) {
 				setError(error.response.data.message);
 			}
+            setLoader(false);
 		}
 	};
     useEffect(() => {
@@ -90,6 +94,11 @@ const Register = () => {
                             <button type="submit" className={styles.green_btn} style={{backgroundColor:"#355cdc"}}>
                                 Register
                             </button>
+                            {loader && (
+                <svg viewBox="25 25 50 50">
+                  <circle r="20" cy="50" cx="50"></circle>
+                </svg>
+              )}
                         </form>
                     </div>
                 </div>

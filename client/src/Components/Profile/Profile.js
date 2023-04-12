@@ -11,6 +11,7 @@ import Modal from "react-bootstrap/Modal";
 import toast, { Toaster } from "react-hot-toast";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase-config";
+import emailjs from "@emailjs/browser"
 
 const getNextSaturdayAndSunday = () => {
   const today = new Date();
@@ -72,8 +73,35 @@ const Profile = () => {
           setManager({ ...manager, alerts: manager.alerts });
           if(passStatus === "Accepted"){
             manager.pickedPlayers.push({id: profile._id, name: profile.name, role: profile.role, age: profile.age, phoneNumber:profile.phoneNumber,email:profile.email});
-          }
+          } 
           saveChangesManager(currentAlert.id);
+          const emailContent = {
+            player_name: profile.name,
+            manager_name: manager.name,
+            manager_email: manager.email,
+    
+          }
+          // if player email is gmail
+          if(manager.email.includes("gmail")){
+          emailjs.send("service_r06z936","template_uj9zjas",emailContent,"jb0sHBpxEqFcrpWTc")
+          .then((result) => {
+              console.log(result.text);
+          })
+          .catch((error) => {
+              console.log(error.text);
+          }
+          );     
+        } // if player email is outlook
+        else if(manager.email.includes("outlook")){
+          emailjs.send("service_vg25zsg","template_uj9zjas",emailContent,"jb0sHBpxEqFcrpWTc")
+          .then((result) => {
+              console.log(result.text);
+          })
+          .catch((error) => {
+              console.log(error.text);
+          }
+          );     
+        }
           setManager(null);
         }
       });
@@ -181,6 +209,7 @@ const Profile = () => {
       setProfile({ ...profile, alerts: profile.alerts });
       saveChangesPlayer();
       getManager(alert.id);
+      
     }
   // }else{
     // toast.error("You can only accept requests before 5pm on Friday");

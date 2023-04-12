@@ -13,7 +13,7 @@ import ball from './cricket-ball.png';
 import link from './link.png';
 import {storage} from './firebase-config';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
-
+import emailjs from '@emailjs/browser';
 
 
 const UserCard = ({player}) => {
@@ -32,7 +32,7 @@ const UserCard = ({player}) => {
           })
         })
     },[])
-    const pickPlayer = (e) => {
+    const pickPlayer = async (e) => {
       e.preventDefault();
       const now = new Date();
       const dayOfWeek = now.getDay();
@@ -52,8 +52,33 @@ const UserCard = ({player}) => {
                   manager.alerts.push({name:player.name,day:"Saturday",id:player._id,status:"Pending"});
                   player.alerts.push({name:manager.name,day:"Saturday",id:manager._id,teamName:manager.teamName,status:"Pending"});
                   toast.success("Sent Request to "+player.name+" for Saturday");
-                  // pickSat = false;
-                  // send email here
+                  const emailContent = {
+                    player_email: player.email,
+                    team_name: manager.teamName,
+                    to_name: player.name,
+
+                  }
+                  // if player email is gmail
+                  if(player.email.includes("gmail")){
+                  emailjs.send("service_r06z936","template_o90qlkc",emailContent,"jb0sHBpxEqFcrpWTc")
+                  .then((result) => {
+                      console.log(result.text);
+                  })
+                  .catch((error) => {
+                      console.log(error.text);
+                  }
+                  );     
+                } // if player email is outlook
+                else if(player.email.includes("outlook")){
+                  emailjs.send("service_vg25zsg","template_o90qlkc",emailContent,"jb0sHBpxEqFcrpWTc")
+                  .then((result) => {
+                      console.log(result.text);
+                  })
+                  .catch((error) => {
+                      console.log(error.text);
+                  }
+                  );     
+                }
               }
           }
           else{
@@ -76,8 +101,32 @@ const UserCard = ({player}) => {
                 manager.alerts.push({name:player.name,day:"Sunday",id:player._id,status:"Pending"});
                 player.alerts.push({name:manager.name,day:"Sunday",id:manager._id,teamName:manager.teamName,status:"Pending"});
                 toast.success("Sent Request to "+player.name+" for Sunday");
-                // pickSat = false;
-                // send email here
+                const emailContent = {
+                  player_email: player.email,
+                  team_name: manager.teamName,
+                  to_name: player.name,
+
+                }
+                if(player.email.includes("gmail")){
+                  emailjs.send("service_r06z936","template_o90qlkc",emailContent,"jb0sHBpxEqFcrpWTc")
+                  .then((result) => {
+                      console.log(result.text);
+                  })
+                  .catch((error) => {
+                      console.log(error.text);
+                  }
+                  );     
+                } // if player email is outlook
+                else if(player.email.includes("outlook")){
+                  emailjs.send("service_vg25zsg","template_o90qlkc",emailContent,"jb0sHBpxEqFcrpWTc")
+                  .then((result) => {
+                      console.log(result.text);
+                  })
+                  .catch((error) => {
+                      console.log(error.text);
+                  }
+                  );     
+                }
             }
             } else{
               toast.error("Player is already picked for Sunday")
