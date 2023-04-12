@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.81e5d14f.css",
+    "main.js": "/static/js/main.d6820be6.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/VK.jpg": "/static/media/VK.d1f8a7af4a27eeb40ad3.jpg",
+    "static/media/FindMyXILogo.png": "/static/media/FindMyXILogo.1711aa5da6c362356cc2.png",
+    "static/media/LandingPageIllustration.png": "/static/media/LandingPageIllustration.b0f6f487f8eb3f3f83b0.png",
+    "static/media/cricket-ball.png": "/static/media/cricket-ball.35ca5aad9ef894e7bf38.png",
+    "static/media/cricket-bat.png": "/static/media/cricket-bat.c3859392f0a701b1728f.png",
+    "index.html": "/index.html",
+    "main.81e5d14f.css.map": "/static/css/main.81e5d14f.css.map",
+    "main.d6820be6.js.map": "/static/js/main.d6820be6.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.81e5d14f.css",
+    "static/js/main.d6820be6.js"
+  ]
+}
