@@ -17,7 +17,7 @@ const Home = () => {
           <div className="flex flex-col lg:flex-row">
             <div className="basis-1/2">
               <h3 className="font-sans font-bold text-4xl mx-5 mt-8 lg:mx-40 lg:mt-20">
-                FindMyXI
+                Arjun
               </h3>
               <p className="font-sans font-normal text-xl mx-5 mt-3 w-80 lg:mx-40">
                 <span className="font-bold">FindMyXI</span> is a platform that
