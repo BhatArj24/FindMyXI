@@ -41,7 +41,7 @@ const UserCard = ({player}) => {
         toast.error("You must be logged into a manager account to pick a player");
         return;
       }
-      // if(dayOfWeek>2 && (dayOfWeek<4 || (dayOfWeek===4 && hour<17))){
+      if(dayOfWeek>2 && (dayOfWeek<4 || (dayOfWeek===4 && hour<17))){
         if(pickSat){
           if(player.availableSat){
             if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat){
@@ -140,9 +140,9 @@ const UserCard = ({player}) => {
       saveChanges("player");
       saveChanges("manager");
       setShow(false);
-      // } else{
-        // toast.error("You can only request players before 5pm on Thursday and after Tuesday");
-      // }
+      } else{
+        toast.error("You can only request players before 5pm on Thursday and after Tuesday");
+      }
     }
     
     useEffect(() => {
