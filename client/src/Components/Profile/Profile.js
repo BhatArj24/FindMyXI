@@ -12,6 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase-config";
 import emailjs from "@emailjs/browser"
+import {Input} from 'reactstrap';
 
 const getNextSaturdayAndSunday = () => {
   const today = new Date();
@@ -32,6 +33,8 @@ const Profile = () => {
   const [manager, setManager] = useState(null);
   const [currentAlert, setCurrentAlert] = useState(null);
   const [passStatus, setPassStatus] = useState(null);
+  const [changeTeamShow, setChangeTeamShow] = useState(false);
+  const [teams, setTeams] = useState([]);
   const getProfile = async () => {
     const userId = sessionStorage.getItem("userId");
     const url = `https://findmyxi.onrender.com/api/profile/${userId}`;
@@ -40,6 +43,15 @@ const Profile = () => {
       setProfile(res.data);
     } catch (err) {
       console.log(err);
+    }
+  };
+  const getTeams = async () => {
+    const url = "https://findmyxi.onrender.com/api/teams";
+    try{
+      const res = await axios.get(url);
+      setTeams(Object.values(res.data));
+    } catch(error){
+      console.log(error);
     }
   };
   useEffect(() => {
@@ -55,12 +67,13 @@ const Profile = () => {
     }
   }, [profile]);
   useEffect(() => {
+    
     const user = sessionStorage.getItem("userId");
     if (user === null) {
       navigate("/login");
     } else {
       getProfile();
-      
+      getTeams();
       // setDisplayAlerts(true);
     }
   }, []);
@@ -227,7 +240,9 @@ const Profile = () => {
       getManager(alert.id);
     }
   };
-
+  const handleChange = ({ currentTarget: input }) => {
+		setProfile({ ...profile, [input.name]: input.value });
+	};
   return (
     <section>
       <NavBar />
@@ -320,6 +335,36 @@ const Profile = () => {
           </Button>
 
           <Button variant="danger" onClick={() => setAvailabilityShow(false)} style={{backgroundColor:"red",color:"white"}}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+        <Modal show={changeTeamShow} onHide={() => setChangeTeamShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Team</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} style={{width:"30%"}}>
+                    <option value="None">None</option>
+                    {teams.map(team=>(
+                        team.map(t=>(
+                          <option value={t.teamName}>{t.teamName}</option>
+                        )
+                        )
+                    ))}
+                </Input>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={()=>{
+            saveChangesPlayer()
+            setChangeTeamShow(false)
+            toast.success("Team Changed")
+          }} style={{backgroundColor:"green",color:"white"}}>
+            {" "}
+            Save Changes{" "}
+          </Button>
+          <Button variant="danger" onClick={() => setChangeTeamShow(false)} style={{backgroundColor:"red",color:"white"}}>
             Close
           </Button>
         </Modal.Footer>
@@ -522,6 +567,9 @@ const Profile = () => {
                     </tr>
                   </tbody>
                 </Table>
+                <Button variant="primary" onClick={() => setChangeTeamShow(true)} block style={{ marginTop: "2%",backgroundColor:"blue" }}>
+                  Change Team
+                </Button>
               </div>
             )}
 
