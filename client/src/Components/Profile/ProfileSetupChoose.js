@@ -19,7 +19,7 @@ const ProfileSetupChoose = () => {
                     </Link>
                     <Link to={"/profile-setup-manager"} className="btn btn-lg text-light btn-light bg-slate-200 w-56 m-auto mt-4 lg:w-1/3">
                         <img src={team} className='mx-auto w-80'></img>
-                        <h1 className='text-black font-bold mb-3' style={{fontSize:"36px"}}>Team Profile</h1>
+                        <h1 className='text-black font-bold mb-3' style={{fontSize:"36px"}}>Team Captain Profile</h1>
                     </Link>
                 </div>
             </div>

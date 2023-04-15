@@ -415,7 +415,15 @@ const Profile = () => {
             </Row>
               </div>
             ) : (
-              <h3 style={{ marginTop: "1%" }} className="text-3xl">Manager Details: </h3>
+              <div>
+                <h3 style={{ marginTop: "1%" }} className="text-3xl">Manager Details: </h3>
+                <Row>
+              <Col>Captain Name: {profile.name}</Col>
+              <Col>Division: {profile.division}</Col>
+              <Col>Team Name: {profile.teamName}</Col>
+            </Row>
+              </div>
+
             )}
             
             <h3 style={{ marginTop: "1%" }} className="text-3xl">Contact Details: </h3>
