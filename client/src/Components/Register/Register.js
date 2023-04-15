@@ -62,7 +62,7 @@ const Register = () => {
                             <h1 style={{marginBottom:"10%", fontWeight:"bolder"}}>Register Account</h1>
                             <input
                                 type="text"
-                                placeholder="Name"
+                                placeholder="Player/Captain Name"
                                 name="name"
                                 onChange={handleChange}
                                 value={data.name}
@@ -72,7 +72,7 @@ const Register = () => {
                             />
                             <input
                                 type="email"
-                                placeholder="Email"
+                                placeholder="Player/Captain Email"
                                 name="email"
                                 onChange={handleChange}
                                 value={data.email}
