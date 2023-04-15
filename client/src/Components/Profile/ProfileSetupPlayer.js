@@ -96,7 +96,7 @@ const ProfileSetupPlayer = () => {
           <div>
             <FormGroup>
               <Label for="profilePic" style={{fontWeight:"bold"}}>Profile Picture:</Label>
-              <Input type="file" name="profilePic" id="profilePic" onChange={(event)=>{setImageUpload(event.target.files[0])}} style={{width:"30%"}}/>
+              <Input type="file" name="profilePic" id="profilePic" onChange={(event)=>{setImageUpload(event.target.files[0])}} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
               <Label for="age" style={{fontWeight:"bold"}}>Age:</Label>
@@ -104,11 +104,11 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
               <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number:</Label>
-              <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} style={{width:"30%"}}/>
+              <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
               <Label for="role" style={{fontWeight:"bold"}}>Role:</Label>
-              <Input type="select" name="role" id="role" onChange={handleChange} style={{width:"30%"}}>
+              <Input type="select" name="role" id="role" onChange={handleChange} className='w-40 lg:w-1/3'>
                 <option value=""></option>
                 <option value="Batsman">Batsman</option>
                 <option value="Bowler">Bowler</option>
@@ -119,7 +119,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
               <Label for="battingHand" style={{fontWeight:"bold"}}>Batting Hand:</Label>
-              <Input type="select" name="battingHand" id="battingHand" onChange={handleChange} style={{width:"30%"}}>
+              <Input type="select" name="battingHand" id="battingHand" onChange={handleChange} className='w-24 lg:w-1/3'>
                 <option value=""></option>
                 <option value="Right">Right</option>
                 <option value="Left">Left</option>
@@ -127,7 +127,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
               <Label for="battingPos" style={{fontWeight:"bold"}}>Batting Position:</Label>
-              <Input type="select" name="battingPos" id="battingPos" onChange={handleChange} style={{width:"30%"}}>
+              <Input type="select" name="battingPos" id="battingPos" onChange={handleChange} className='w-40 lg:w-1/3'>
                 <option value=""></option>
                 <option value="Top Order">Top Order</option>
                 <option value="Middle Order">Middle Order</option>
@@ -136,7 +136,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="bowlingHand" style={{fontWeight:"bold"}}>Bowling Hand:</Label>
-                <Input type="select" name="bowlingHand" id="bowlingHand" onChange={handleChange} style={{width:"30%"}}>
+                <Input type="select" name="bowlingHand" id="bowlingHand" onChange={handleChange} className='w-24 lg:w-1/3'>
                     <option value=""></option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
@@ -144,7 +144,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="bowlingType" style={{fontWeight:"bold"}}>Bowling Type:</Label>
-                <Input type="select" name="bowlingType" id="bowlingType" onChange={handleChange} style={{width:"30%"}}>
+                <Input type="select" name="bowlingType" id="bowlingType" onChange={handleChange} className='w-40 lg:w-1/3'>
                     <option value=""></option>
                     <option value="Pace">Pace</option>
                     <option value="Off-Spin">Off-spin</option>
@@ -153,7 +153,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="primaryTeam" style={{fontWeight:"bold"}}>Primary Team:</Label>
-                <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} style={{width:"30%"}}>
+                <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} className='w-40 lg:w-1/3'>
                     <option value="None">None</option>
                     {teams.map(team=>(
                         team.map(t=>(
@@ -177,17 +177,17 @@ const ProfileSetupPlayer = () => {
             </FormGroup> */}
             <FormGroup>
                 <Label for="CricClubsLink" style={{fontWeight:"bold"}}>CricClubs Link:</Label>
-                <Input type="text" name="CricClubsLink" id="matches" onChange={handleChange} style={{width:"30%"}}/>
+                <Input type="text" name="CricClubsLink" id="matches" onChange={handleChange} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
                 <Label for="CricClubsId" style={{fontWeight:"bold"}}>CricClubs Id:</Label>
-                <Input type="text" name="CricClubsId" id="runs" onChange={handleChange} style={{width:"30%"}}/>
+                <Input type="text" name="CricClubsId" id="runs" onChange={handleChange} className='w-40 lg:w-1/3'/>
             </FormGroup>
 
                 </div>
                 
                 <div style={{padding:"15px"}}>
-                    <button id="saveBtn" className="btn btn-sm p-2 text-light btn-dark" style={{marginLeft:"8%"}} onClick={handleSubmit}>Save</button>
+                <button className="bg-primary font-bold text-white rounded-3xl h-12 w-24" onClick={handleSubmit}>Save</button>
                 </div>
                 </div>
                 </section>
