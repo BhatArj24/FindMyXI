@@ -349,6 +349,7 @@ const Profile = () => {
         </Modal.Header>
         <Modal.Body>
         <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} style={{width:"30%"}}>
+                    <option value=""></option>
                     <option value="None">None</option>
                     {teams.map(team=>(
                         team.map(t=>(
