@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     secondaryTeamSat: { type: String},
     secondaryTeamSun: { type: String},
     role: { type: String},
-    phoneNumber: { type: Number},
+    phoneNumber: { type: String},
     teamName: { type: String},
     primaryTeamPickedSat : { type: Boolean},
     secondaryTeamPickedSat : { type: Boolean},
