@@ -295,7 +295,11 @@ const Profile = () => {
         <div></div>
       )}
 
-      <Modal show={availabilityShow} onHide={() => setAvailabilityShow(false)}>
+      <Modal show={availabilityShow} onHide={() => {
+        window.location.reload();
+        
+        setAvailabilityShow(false)
+        }}>
         <Modal.Header closeButton>
           <Modal.Title>Set Availability</Modal.Title>
         </Modal.Header>
@@ -337,13 +341,21 @@ const Profile = () => {
             Save Changes{" "}
           </Button>
 
-          <Button variant="danger" onClick={() => setAvailabilityShow(false)} style={{backgroundColor:"red",color:"white"}}>
+          <Button variant="danger" onClick={() => {
+            setAvailabilityShow(false)
+        window.location.reload();
+            
+            }} style={{backgroundColor:"red",color:"white"}}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
 
-        <Modal show={changeTeamShow} onHide={() => setChangeTeamShow(false)}>
+        <Modal show={changeTeamShow} onHide={() => {
+          window.location.reload();
+          setChangeTeamShow(false)
+          
+          }}>
         <Modal.Header closeButton>
           <Modal.Title>Change Team</Modal.Title>
         </Modal.Header>
@@ -368,7 +380,11 @@ const Profile = () => {
             {" "}
             Save Changes{" "}
           </Button>
-          <Button variant="danger" onClick={() => setChangeTeamShow(false)} style={{backgroundColor:"red",color:"white"}}>
+          <Button variant="danger" onClick={() => {
+            setChangeTeamShow(false)
+        window.location.reload();
+            
+            }} style={{backgroundColor:"red",color:"white"}}>
             Close
           </Button>
         </Modal.Footer>
