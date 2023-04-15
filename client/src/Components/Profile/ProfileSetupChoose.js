@@ -15,11 +15,11 @@ const ProfileSetupChoose = () => {
                 <div style={{padding:"15px",width:"100%"}} className='flex flex-col lg:flex-row'>
                     <Link to={'/profile-setup-player'}  className="btn btn-lg text-light btn-light bg-slate-200 w-56 m-auto mt-4 lg:w-1/3">
                         <img src={player} className='mx-auto w-80'></img>
-                        <h1 className='text-black font-bold mb-3' style={{fontSize:"36px"}}>Player Profile</h1>
+                        <h1 className='text-black font-bold mb-3' style={{fontSize:"36px"}}>I am a Player</h1>
                     </Link>
                     <Link to={"/profile-setup-manager"} className="btn btn-lg text-light btn-light bg-slate-200 w-56 m-auto mt-4 lg:w-1/3">
                         <img src={team} className='mx-auto w-80'></img>
-                        <h1 className='text-black font-bold mb-3' style={{fontSize:"36px"}}>Team Captain Profile</h1>
+                        <h1 className='text-black font-bold mb-3' style={{fontSize:"36px"}}>I am a Team Captain</h1>
                     </Link>
                 </div>
             </div>
