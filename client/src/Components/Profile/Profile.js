@@ -41,6 +41,9 @@ const Profile = () => {
     try {
       const { data: res } = await axios.get(url);
       setProfile(res.data);
+      if(profile.isPlayer === null){
+        toast.error("You have not set up your profile yet. Please click the button below to set up your profile");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -572,12 +575,22 @@ const Profile = () => {
                 </Button>
               </div>
             )}
-
+            <Button
+              variant="success"
+              onClick={()=>{
+                navigate('/profile-setup-choose')
+              }
+              }
+              block
+              style={{ marginRight: "2%",backgroundColor:"green", marginTop:"2%" }}
+            >
+              Edit Profile / Complete Setup
+            </Button>
             <Button
               variant="danger"
               onClick={logOut}
               block
-              style={{ marginTop: "2%",backgroundColor:"red" }}
+              style={{ backgroundColor:"red", marginTop:"2%" }}
             >
               Log out
             </Button>
