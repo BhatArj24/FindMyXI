@@ -61,7 +61,7 @@ const ProfileSetupPlayer = () => {
 		e.preventDefault();
 		try {
      // check if any fields are empty
-      if(data.age === 0 || data.role === "" || data.battingHand === "" || data.battingPos === "" || data.bowlingHand === "" || data.bowlingType === "" || data.CricClubsLink === "" || data.CricClubsId === "" || data.primaryTeam === "" || data.phoneNumber === 0){
+      if(data.age === 0 || data.role === "" || data.battingHand === "" || data.battingPos === "" || data.bowlingHand === "" || data.bowlingType === "" || data.primaryTeam === "" || data.phoneNumber === 0){
         toast.error("Please fill in all fields");
         
       } else {
@@ -99,15 +99,15 @@ const ProfileSetupPlayer = () => {
               <Input type="file" name="profilePic" id="profilePic" onChange={(event)=>{setImageUpload(event.target.files[0])}} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
-              <Label for="age" style={{fontWeight:"bold"}}>Age:</Label>
+              <Label for="age" style={{fontWeight:"bold"}}>Age <span style={{color:"red"}}>*</span>:</Label>
               <Input type="number" name="age" id="age" onChange={handleChange} style={{width:"30%"}} />
             </FormGroup>
             <FormGroup>
-              <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number:</Label>
+              <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number <span style={{color:"red"}}>*</span>:</Label>
               <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
-              <Label for="role" style={{fontWeight:"bold"}}>Role:</Label>
+              <Label for="role" style={{fontWeight:"bold"}}>Role <span style={{color:"red"}}>*</span>:</Label>
               <Input type="select" name="role" id="role" onChange={handleChange} className='w-40 lg:w-1/3'>
                 <option value=""></option>
                 <option value="Batsman">Batsman</option>
@@ -118,7 +118,7 @@ const ProfileSetupPlayer = () => {
               </Input>
             </FormGroup>
             <FormGroup>
-              <Label for="battingHand" style={{fontWeight:"bold"}}>Batting Hand:</Label>
+              <Label for="battingHand" style={{fontWeight:"bold"}}>Batting Hand <span style={{color:"red"}}>*</span>:</Label>
               <Input type="select" name="battingHand" id="battingHand" onChange={handleChange} className='w-24 lg:w-1/3'>
                 <option value=""></option>
                 <option value="Right">Right</option>
@@ -126,7 +126,7 @@ const ProfileSetupPlayer = () => {
               </Input>
             </FormGroup>
             <FormGroup>
-              <Label for="battingPos" style={{fontWeight:"bold"}}>Batting Position:</Label>
+              <Label for="battingPos" style={{fontWeight:"bold"}}>Batting Position <span style={{color:"red"}}>*</span>:</Label>
               <Input type="select" name="battingPos" id="battingPos" onChange={handleChange} className='w-40 lg:w-1/3'>
                 <option value=""></option>
                 <option value="Top Order">Top Order</option>
@@ -135,7 +135,7 @@ const ProfileSetupPlayer = () => {
             </Input>
             </FormGroup>
             <FormGroup>
-                <Label for="bowlingHand" style={{fontWeight:"bold"}}>Bowling Hand:</Label>
+                <Label for="bowlingHand" style={{fontWeight:"bold"}}>Bowling Hand <span style={{color:"red"}}>*</span>:</Label>
                 <Input type="select" name="bowlingHand" id="bowlingHand" onChange={handleChange} className='w-24 lg:w-1/3'>
                     <option value=""></option>
                     <option value="Right">Right</option>
@@ -143,7 +143,7 @@ const ProfileSetupPlayer = () => {
                 </Input>
             </FormGroup>
             <FormGroup>
-                <Label for="bowlingType" style={{fontWeight:"bold"}}>Bowling Type:</Label>
+                <Label for="bowlingType" style={{fontWeight:"bold"}}>Bowling Type <span style={{color:"red"}}>*</span>:</Label>
                 <Input type="select" name="bowlingType" id="bowlingType" onChange={handleChange} className='w-40 lg:w-1/3'>
                     <option value=""></option>
                     <option value="Pace">Pace</option>
@@ -152,7 +152,7 @@ const ProfileSetupPlayer = () => {
                 </Input>
             </FormGroup>
             <FormGroup>
-                <Label for="primaryTeam" style={{fontWeight:"bold"}}>Primary Team:</Label>
+                <Label for="primaryTeam" style={{fontWeight:"bold"}}>Primary Team <span style={{color:"red"}}>*</span>:</Label>
                 <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} className='w-40 lg:w-1/3'>
                     <option value="None">None</option>
                     {teams.map(team=>(
@@ -163,20 +163,8 @@ const ProfileSetupPlayer = () => {
                     ))}
                 </Input>
             </FormGroup>
-            {/* <FormGroup>
-                <Label for="secondaryTeam" style={{fontWeight:"bold"}}>Secondary Team:</Label>
-                <Input type="select" name="secondaryTeam" id="secondaryTeam" onChange={handleChange} style={{width:"30%"}}>
-                    <option value="None">None</option>
-                    {teams.map(team=>(
-                        team.map(t=>(
-                          <option value={t.teamName}>{t.teamName}</option>
-                        )
-                        )
-                    ))}
-                </Input>
-            </FormGroup> */}
             <FormGroup>
-                <Label for="CricClubsLink" style={{fontWeight:"bold"}}>CricClubs Link:</Label>
+                <Label for="CricClubsLink" style={{fontWeight:"bold"}}>Link to CricClubs Profile:</Label>
                 <Input type="text" name="CricClubsLink" id="matches" onChange={handleChange} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
