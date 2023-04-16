@@ -62,6 +62,34 @@ const ProfileSetupManager = () => {
   return (
     <section>
         <Toaster/>
+        <div role="alert" class="rounded-xl border border-gray-100 p-4 shadow-xl m-auto w-2/3 mb-2 lg:w-1/3">
+  <div class="flex items-start gap-4">
+    <span class="text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    </span>
+
+    <div class="flex-1">
+      <strong class="block font-medium text-gray-900">Registration</strong>
+
+      <p class="mt-1 text-sm text-gray-700">
+        You <span style={{fontWeight:"bold"}}>must</span> complete this form in order to be fully registered.
+      </p>
+    </div>
+  </div>
+</div>
     <div style={{display:"flex"}}>
         <img src={logo} alt="a" style={{width:"100px",height:"80px",paddingTop:"10px",paddingLeft:"20px"}}></img>
         <h1 style={{paddingTop:"10px",paddingLeft:"20px", fontWeight:"bold"}} className='text-4xl'>Profile Setup</h1>
@@ -74,15 +102,15 @@ const ProfileSetupManager = () => {
                 <Input type="file" name="profilePicture" id="profilePicture" onChange={(event)=>{setImageUpload(event.target.files[0])}} className='w-40 lg:w-1/3' />
             </FormGroup>
             <FormGroup>
-                <Label for="teamName" style={{fontWeight:"bold"}}>Team Name:</Label>
+                <Label for="teamName" style={{fontWeight:"bold"}}>Team Name <span style={{color:"red"}}>*</span>:</Label>
                 <Input type="text" name="teamName" id="teamName" onChange={handleChange} className='w-40 lg:w-1/3'/>
             </FormGroup>
             <FormGroup>
-                <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number:</Label>
+                <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number <span style={{color:"red"}}>*</span>:</Label>
                 <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} className='w-40 lg:w-1/3' />
             </FormGroup>
             <FormGroup>
-              <Label for="division" style={{fontWeight:"bold"}}>Division:</Label>
+              <Label for="division" style={{fontWeight:"bold"}}>Division <span style={{color:"red"}}>*</span>:</Label>
               <Input type="select" name="division" id="division" onChange={handleChange} className='w-20 lg:w-1/3'>
                 <option value=""></option>
                 <option value="A">A</option>

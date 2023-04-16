@@ -88,6 +88,34 @@ const ProfileSetupPlayer = () => {
   return (
     <section>
       <Toaster/>
+      <div role="alert" class="rounded-xl border border-gray-100 p-4 shadow-xl m-auto w-2/3 mb-2 lg:w-1/3">
+  <div class="flex items-start gap-4">
+    <span class="text-blue-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-6 w-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    </span>
+
+    <div class="flex-1">
+      <strong class="block font-medium text-gray-900">Registration</strong>
+
+      <p class="mt-1 text-sm text-gray-700">
+        You <span style={{fontWeight:"bold"}}>must</span> complete this form in order to be fully registered.
+      </p>
+    </div>
+  </div>
+</div>
     <div style={{display:"flex"}}>
         <img src={logo} style={{width:"100px",height:"80px",paddingTop:"10px",paddingLeft:"20px"}} alt="a"></img>
         <h1 style={{paddingTop:"10px",paddingLeft:"20px", fontWeight:"bold"}} className='text-4xl'>Profile Setup</h1>
