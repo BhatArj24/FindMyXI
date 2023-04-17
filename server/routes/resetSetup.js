@@ -5,7 +5,10 @@ router.post("/",async (req,res) => {
     try{
         const user = await User.findById({_id:req.body._id});
         if(user){
-            user.password = req.body.password;
+            const salt = await bcrypt.genSalt(Number(process.env.SALT));
+        const hashPassword = await bcrypt.hash(req.body.password,salt);
+            user.password = hashPassword;
+            
             await user.save();
             const token = user.generateAuthToken();
             res.status(201).send({message:"User updated successfully",data:token});
