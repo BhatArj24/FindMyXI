@@ -1,11 +1,12 @@
-import React, { useState, useEffect} from 'react'
-import {Link, useNavigate, useParams} from 'react-router-dom';
-import NavBar from '../NavBar';
+import React, { useState} from 'react'
+import {useNavigate} from 'react-router-dom';
+
 // import styles from './styles.module.css';
 import axios from 'axios';
 import "./Loader.css";
 import styles from './styles.module.css';
 import toast, {Toaster} from 'react-hot-toast';
+import emailjs from '@emailjs/browser';
 
 
 const ResetEmail = () => {
@@ -14,6 +15,7 @@ const ResetEmail = () => {
     const [data, setData] = useState({
         email:""
     });
+    const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
     const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -29,14 +31,39 @@ const ResetEmail = () => {
         }
       else {
         const url = `http://findmyxi.onrender.com/api/reset/${data.email}`;
-			const res = await axios.get(url);
-      
-      const uid = res.data.data[0]._id;
+        // const url = `http://localhost:8080/api/reset/${data.email}`;
 
-			navigate(`/password-reset/${uid}`);
-      // send email with link to this page
+			const res = await axios.get(url);
+      setLoader(false);
+      setSuccess(true);
+      const uid = res.data.data[0]._id;
+      const emailContent = {
+        email: data.email,
+        link: `https://findmyxi.netlify.app/password-reset/${uid}`
+
       }
-        setLoader(false);
+      // if player email is gmail
+      if(data.email.includes("gmail")){
+        emailjs.send("service_r06z936","template_l6dj9en",emailContent,"jb0sHBpxEqFcrpWTc")
+        .then((result) => {
+            console.log(result.text);
+        })
+        .catch((error) => {
+            console.log(error.text);
+        }
+        );     
+      } // if player email is outlook
+      else if(data.email.includes("outlook")){
+        emailjs.send("service_vg25zsg","template_l6dj9en",emailContent,"jb0sHBpxEqFcrpWTc")
+        .then((result) => {
+            console.log(result.text);
+        })
+        .catch((error) => {
+            console.log(error.text);
+        }
+        );     
+      }
+      }
 		} catch (error) {
             console.log(error);
 			if (
@@ -89,6 +116,7 @@ const ResetEmail = () => {
                   <circle r="20" cy="50" cx="50"></circle>
                 </svg>
               )}
+          {success && <div style={{color:"green"}}>Email sent for password reset. You can close this tab now.</div>}
         
         </form>
       </section>
