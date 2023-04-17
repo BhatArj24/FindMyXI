@@ -30,7 +30,7 @@ const ResetEmail = () => {
         
         }
       else {
-        const url = `http://findmyxi.onrender.com/api/reset/${data.email}`;
+        const url = `https://findmyxi.onrender.com/api/reset/${data.email}`;
         // const url = `http://localhost:8080/api/reset/${data.email}`;
 
 			const res = await axios.get(url);
