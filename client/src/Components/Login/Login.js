@@ -69,6 +69,7 @@ const Login = () => {
                 style={{ marginBottom: "5%" }}
               />
               {error && <div className={styles.error_msg}>{error}</div>}
+
               <button
                 type="submit"
                 className={styles.green_btn}
@@ -76,6 +77,12 @@ const Login = () => {
               >
                 Sign In
               </button>
+              <Link to="/password-reset">
+                <p className="text-blue-400 ">
+                  Forgot Password?
+                </p>
+              </Link>
+
               {loader && (
                 <svg viewBox="25 25 50 50">
                   <circle r="20" cy="50" cx="50"></circle>

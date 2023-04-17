@@ -6,6 +6,8 @@ import Profile from './Components/Profile/Profile.js';
 import ProfileSetupPlayer from './Components/Profile/ProfileSetupPlayer.js';
 import ProfileSetupManager from './Components/Profile/ProfileSetupManager.js';
 import ProfileSetupChoose from './Components/Profile/ProfileSetupChoose.js';
+import PasswordReset from './Components/Reset/PasswordReset.js';
+import ResetEmail from './Components/Reset/ResetEmail.js';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -25,6 +27,8 @@ function App() {
           <Route path="/profile-setup-player" element={<ProfileSetupPlayer/>}/>
           <Route path="/profile-setup-manager" element = {<ProfileSetupManager/>}/>
           <Route path="/profile-setup-choose" element = {<ProfileSetupChoose/>}/>
+          <Route path="/password-reset/:id" element={<PasswordReset/>}/>
+          <Route path="/password-reset" element={<ResetEmail/>}/>
         </Routes>
         
       </div>
