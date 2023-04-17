@@ -9,6 +9,7 @@ const setupRoutes = require("./routes/setup");
 const teamRoutes = require("./routes/teams");
 const playerRoutes = require("./routes/players");
 const profileRoutes = require("./routes/profile");
+const resetRoutes = require("./routes/reset");
 
 connection();
 
@@ -21,6 +22,7 @@ app.use("/api/setup", setupRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/players", playerRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/reset", resetRoutes);
 app.get("/", (req, res) => {
     res.send({message:"Welcome to the Fantasy Football API"});
 });
