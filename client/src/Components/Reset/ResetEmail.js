@@ -29,8 +29,9 @@ const ResetEmail = () => {
         }
       else {
         const url = `https://findmyxi.onrender.com/api/reset/${data.email}`;
-			const { data: res } = await axios.get(url);
-			navigate(`/password-reset/${res._id}`);
+			const res = await axios.get(url);
+      console.log(res.data.data);
+			// navigate(`/password-reset/${res._id}`);
       }
         setLoader(false);
 		} catch (error) {

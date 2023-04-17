@@ -35,7 +35,7 @@ const PasswordReset = () => {
         }
       
       else {
-        const url = "https://findmyxi.onrender.com/api/setup";
+        const url = "https://findmyxi.onrender.com/api/resetSetup";
 			const { data: res } = await axios.post(url, data);
 			navigate("/login");
       }
