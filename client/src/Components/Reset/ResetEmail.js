@@ -34,6 +34,7 @@ const ResetEmail = () => {
       const uid = res.data.data[0]._id;
 
 			navigate(`/password-reset/${uid}`);
+      // send email with link to this page
       }
         setLoader(false);
 		} catch (error) {
