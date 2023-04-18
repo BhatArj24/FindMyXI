@@ -14,7 +14,7 @@ import link from './link.png';
 import {storage} from './firebase-config';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
 import emailjs from '@emailjs/browser';
-
+import Tooltip from './Tooltip';
 
 const UserCard = ({player}) => {
     const [manager,setManager] = useState(null);
@@ -299,7 +299,9 @@ const UserCard = ({player}) => {
 
                     </tbody>
                 </table>
-                            
+                <Tooltip text="Availability Table Information">
+                  <p>This table shows the availability of the player. If they are available Saturday, the Saturday column will appear. If they are available Sunday, the Sunday column will appear. If a cell is green, that means the player has been picked already.</p>  
+                </Tooltip>        
             </div>
             <div className='mt-6 items-center'>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-8 w-48 lg:mx-16' onClick={()=>setShow(true)}>

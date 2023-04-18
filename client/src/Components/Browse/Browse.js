@@ -12,6 +12,8 @@ const Browse = () => {
     const [searchValue, setSearchValue] = useState("");
     const [filterType, setFilterType] = useState("role");
     const [isLoading, setIsLoading] = useState(true);
+    const [availableSaturday, setAvailableSaturday] = useState(false);
+const [availableSunday, setAvailableSunday] = useState(false);
 
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
@@ -49,36 +51,86 @@ const Browse = () => {
               ? player.role.toLowerCase().includes(searchValue.toLowerCase())
               : player.primaryTeam.toLowerCase().includes(searchValue.toLowerCase())
           )
+          .filter((player) => {
+            if (availableSaturday && availableSunday) {
+                return player.availableSat ===true && player.availableSun ===true;
+            } else if (availableSaturday) {
+                return player.availableSat ===true;
+            } else if (availableSunday) {
+                return player.availableSun ===true;
+            } else {
+                return true;
+            }
+        })
           .map((player) => <UserCard key={player._id} player={player} />)
     );
     
     return (
-        <section>
-            <NavBar/>
-            <div className="boxContainer">
-                <table className="elementsContainer">
-                    <tr>
-                        <td>
-                            <input type="text" placeholder="Fliter by..." className="search" value={searchValue} onChange={handleSearchChange} ></input>
-                        </td>
+      <section>
+        <NavBar />
+        <div className="flex flex-col lg:flex-row">
+          <div className="boxContainer">
+            <table className="elementsContainer">
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Fliter by..."
+                    className="search"
+                    value={searchValue}
+                    onChange={handleSearchChange}
+                  ></input>
+                </td>
 
-                        <td>
-                            <select className="filter" value={filterType} onChange={(e) => {
-                                setFilterType(e.target.value);
-                                }}>
-                                <option className="option" value="role">Role</option>
-                                <option className="option" value="name">Name</option>
-                                <option className="option" value="primaryTeam">Primary Team</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
+                <td>
+                  <select
+                    className="filter"
+                    value={filterType}
+                    onChange={(e) => {
+                      setFilterType(e.target.value);
+                    }}
+                  >
+                    <option className="option" value="role">
+                      Role
+                    </option>
+                    <option className="option" value="name">
+                      Name
+                    </option>
+                    <option className="option" value="primaryTeam">
+                      Primary Team
+                    </option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div className='bg-blue-700 text-white rounded-md p-3 mt-2 mx-3 lg:mr-8'>
+            <div>
+              <input
+                type="checkbox"
+                checked={availableSaturday}
+                onChange={(e) => setAvailableSaturday(e.target.checked)}
+                className="mr-2"
+              />
+              <label htmlFor="availableSaturday">Available Saturday</label>
             </div>
-            <div className='flex-wrap flex flex-col w-full mt-2 lg:flex-row'>
-                {renderUsers}    
+            <div>
+              <input
+                type="checkbox"
+                checked={availableSunday}
+                onChange={(e) => setAvailableSunday(e.target.checked)}
+                className="mr-2"
+
+              />
+              <label htmlFor="availableSunday">Available Sunday</label>
             </div>
-        </section>
-    )
+          </div>
+        </div>
+        <div className="flex-wrap flex flex-col w-full mt-2 lg:flex-row">
+          {renderUsers}
+        </div>
+      </section>
+    );
 };
 
 
