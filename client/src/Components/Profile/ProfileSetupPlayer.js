@@ -45,6 +45,16 @@ const ProfileSetupPlayer = () => {
       console.log(error);
     })
   } 
+  const getProfile = async () => {
+    const userId = sessionStorage.getItem("userId");
+    const url = `https://findmyxi.onrender.com/api/profile/${userId}`;
+    try {
+      const { data: res } = await axios.get(url);
+      setData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
@@ -83,21 +93,24 @@ const ProfileSetupPlayer = () => {
 	};
   useEffect(() => {
     getTeams();
+    if(sessionStorage.getItem("curr")==="edit"){
+      getProfile();
+    }
   }, []);
 
   return (
     <section>
       <Toaster/>
-      <div role="alert" class="rounded-xl border border-gray-100 p-4 shadow-xl m-auto w-2/3 mb-2 lg:w-1/3">
-  <div class="flex items-start gap-4">
-    <span class="text-blue-600">
+      <div role="alert" className="rounded-xl border border-gray-100 p-4 shadow-xl m-auto w-2/3 mb-2 lg:w-1/3">
+  <div className="flex items-start gap-4">
+    <span className="text-blue-600">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="h-6 w-6"
+        className="h-6 w-6"
       >
         <path
           stroke-linecap="round"
@@ -107,10 +120,10 @@ const ProfileSetupPlayer = () => {
       </svg>
     </span>
 
-    <div class="flex-1">
-      <strong class="block font-medium text-gray-900">Registration</strong>
+    <div className="flex-1">
+      <strong className="block font-medium text-gray-900">Registration</strong>
 
-      <p class="mt-1 text-sm text-gray-700">
+      <p className="mt-1 text-sm text-gray-700">
         You <span style={{fontWeight:"bold"}}>must</span> complete this form in order to be fully registered.
       </p>
     </div>
@@ -128,15 +141,15 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
               <Label for="age" style={{fontWeight:"bold"}}>Age <span style={{color:"red"}}>*</span>:</Label>
-              <Input type="number" name="age" id="age" onChange={handleChange} style={{width:"30%"}} />
+              <Input type="number" name="age" id="age" onChange={handleChange} style={{width:"30%"}} value={data.age !== 0 ? data.age : null}  />
             </FormGroup>
             <FormGroup>
               <Label for="phoneNumber" style={{fontWeight:"bold"}}>Phone Number <span style={{color:"red"}}>*</span>:</Label>
-              <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} className='w-40 lg:w-1/3'/>
+              <Input type="text" name="phoneNumber" id="phoneNumber" onChange={handleChange} className='w-40 lg:w-1/3' value={data.phoneNumber !== 0 ? data.phoneNumber : null}/>
             </FormGroup>
             <FormGroup>
               <Label for="role" style={{fontWeight:"bold"}}>Role <span style={{color:"red"}}>*</span>:</Label>
-              <Input type="select" name="role" id="role" onChange={handleChange} className='w-40 lg:w-1/3'>
+              <Input type="select" name="role" id="role" onChange={handleChange} className='w-40 lg:w-1/3' value={data.role !== "" ? data.role : ""}>
                 <option value=""></option>
                 <option value="Batsman">Batsman</option>
                 <option value="Bowler">Bowler</option>
@@ -147,7 +160,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
               <Label for="battingHand" style={{fontWeight:"bold"}}>Batting Hand <span style={{color:"red"}}>*</span>:</Label>
-              <Input type="select" name="battingHand" id="battingHand" onChange={handleChange} className='w-24 lg:w-1/3'>
+              <Input type="select" name="battingHand" id="battingHand" onChange={handleChange} className='w-24 lg:w-1/3' value={data.battingHand !== "" ? data.battingHand : ""}>
                 <option value=""></option>
                 <option value="Right">Right</option>
                 <option value="Left">Left</option>
@@ -155,7 +168,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
               <Label for="battingPos" style={{fontWeight:"bold"}}>Batting Position <span style={{color:"red"}}>*</span>:</Label>
-              <Input type="select" name="battingPos" id="battingPos" onChange={handleChange} className='w-40 lg:w-1/3'>
+              <Input type="select" name="battingPos" id="battingPos" onChange={handleChange} className='w-40 lg:w-1/3' value={data.battingPos !== "" ? data.battingPos : ""}>
                 <option value=""></option>
                 <option value="Top Order">Top Order</option>
                 <option value="Middle Order">Middle Order</option>
@@ -164,7 +177,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="bowlingHand" style={{fontWeight:"bold"}}>Bowling Hand <span style={{color:"red"}}>*</span>:</Label>
-                <Input type="select" name="bowlingHand" id="bowlingHand" onChange={handleChange} className='w-24 lg:w-1/3'>
+                <Input type="select" name="bowlingHand" id="bowlingHand" onChange={handleChange} className='w-24 lg:w-1/3' value={data.bowlingHand !== "" ? data.bowlingHand : ""}>
                     <option value=""></option>
                     <option value="Right">Right</option>
                     <option value="Left">Left</option>
@@ -172,7 +185,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="bowlingType" style={{fontWeight:"bold"}}>Bowling Type <span style={{color:"red"}}>*</span>:</Label>
-                <Input type="select" name="bowlingType" id="bowlingType" onChange={handleChange} className='w-40 lg:w-1/3'>
+                <Input type="select" name="bowlingType" id="bowlingType" onChange={handleChange} className='w-40 lg:w-1/3' value={data.bowlingType !== "" ? data.bowlingType : ""}>
                     <option value=""></option>
                     <option value="Pace">Pace</option>
                     <option value="Off-Spin">Off-spin</option>
@@ -181,7 +194,7 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="primaryTeam" style={{fontWeight:"bold"}}>Primary Team <span style={{color:"red"}}>*</span>:</Label>
-                <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} className='w-40 lg:w-1/3'>
+                <Input type="select" name="primaryTeam" id="primaryTeam" onChange={handleChange} className='w-40 lg:w-1/3' value={data.primaryTeam !== "None" ? data.primaryTeam : "None"}>
                     <option value="None">None</option>
                     {teams.map(team=>(
                         team.map(t=>(
@@ -193,11 +206,11 @@ const ProfileSetupPlayer = () => {
             </FormGroup>
             <FormGroup>
                 <Label for="CricClubsLink" style={{fontWeight:"bold"}}>Link to CricClubs Profile:</Label>
-                <Input type="text" name="CricClubsLink" id="matches" onChange={handleChange} className='w-40 lg:w-1/3'/>
+                <Input type="text" name="CricClubsLink" id="matches" onChange={handleChange} className='w-40 lg:w-1/3' value={data.CricClubsLink !== "" ? data.CricClubsLink : ""}/>
             </FormGroup>
             <FormGroup>
                 <Label for="CricClubsId" style={{fontWeight:"bold"}}>CricClubs Id:</Label>
-                <Input type="text" name="CricClubsId" id="runs" onChange={handleChange} className='w-40 lg:w-1/3'/>
+                <Input type="text" name="CricClubsId" id="runs" onChange={handleChange} className='w-40 lg:w-1/3' value={data.CricClubsId !== "" ? data.CricClubsId : ""}/>
             </FormGroup>
 
                 </div>

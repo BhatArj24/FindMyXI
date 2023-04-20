@@ -603,6 +603,7 @@ const Profile = () => {
             <Button
               variant="success"
               onClick={()=>{
+                sessionStorage.setItem("curr","edit");
                 navigate('/profile-setup-choose')
               }
               }

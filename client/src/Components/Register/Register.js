@@ -25,6 +25,7 @@ const Register = () => {
 			const url = "https://findmyxi.onrender.com/api/users";
 			const { data: res } = await axios.post(url, data);
             sessionStorage.setItem("userId", res.data);
+            sessionStorage.setItem("curr","register");
             navigate("/profile-setup-choose");
             setLoader(false);
             

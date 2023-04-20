@@ -20,7 +20,7 @@ const Login = () => {
       const url = "https://findmyxi.onrender.com/api/auth";
       const { data: res } = await axios.post(url, data);
       sessionStorage.setItem("userId", res.data);
-      window.location = "/";
+      window.location = "/profile";
       setLoader(false);
     } catch (error) {
       if (
