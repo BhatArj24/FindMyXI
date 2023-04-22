@@ -22,7 +22,9 @@ const [availableSunday, setAvailableSunday] = useState(false);
         const url = "https://findmyxi.onrender.com/api/players";
         setIsLoading(true);
         try{
+            console.log("fetching players: "+window.performance.now());
             const res = await axios.get(url);
+            console.log("fetching players: "+window.performance.now());
             setPlayers(res.data.data);
             setIsLoading(false);
             
