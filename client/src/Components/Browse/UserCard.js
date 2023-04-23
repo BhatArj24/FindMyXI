@@ -293,8 +293,13 @@ const UserCard = ({player}) => {
                         </tr>
                         <tr className='bg-gray-100'>
                             <td className='border px-1 py-1 lg:px-4 lg:py-2'>Other</td>
-                            {player.availableSat && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}></td>}
-                            {player.availableSun && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}></td>}
+                            {player.availableSat && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.secondaryTeamPickedSat ? "green" : "white")}}>
+                              <p style={{marginLeft:"10%", color:"white"}}>{player.secondaryTeamPickedSat ? player.secondaryTeamSat : null}</p>
+                            </td>}
+                            {player.availableSun && <td className='border px-1 py-1 lg:px-4 lg:py-2' style={{backgroundColor: (player.secondaryTeamPickedSun ? "green" : "white")}}>
+                              <p style={{marginLeft:"10%", color:"white"}}>{player.secondaryTeamPickedSun ? player.secondaryTeamSun : null}</p>
+
+                            </td>}
                         </tr>
 
                     </tbody>
