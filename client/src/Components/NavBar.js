@@ -12,11 +12,12 @@ const NavBar = () => {
                 <nav className="my-2 my-md-0 me-md-3">
                     <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/home">Home</Link>                  
                     <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/browse">Browse</Link>
-                    {
-                        sessionStorage.getItem("userId") ? null : <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/login">Log In</Link>
-                    }
                     <div className="vr h-200 mx-2 text-white"></div>
-                    <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/profile">My Profile</Link>
+                    {
+                        sessionStorage.getItem("userId") ? <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/profile">My Profile</Link> : <Link className="mx-2 btn btn-sm p-2 text-light btn-dark" to="/login">Log In</Link>
+                    }
+                    
+                    
                 </nav>
             </nav>
       </header>
