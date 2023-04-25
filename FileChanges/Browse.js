@@ -22,7 +22,7 @@ const Browse = () => {
   };
   const getPlayers = async () => {
     setSkip(players?.length);
-    const url = `https://findmyxi.onrender.com/api/players?skip=${skip}`;
+    const url = `https://findmyxi.onrender.com/api/players?skip=${skip}&filterType=${filterType}&searchValue=${searchValue}&availableSaturday=${availableSaturday}&availableSunday=${availableSunday}`;
     setIsLoading(true);
     try {
       const res = await axios.get(url);
@@ -31,20 +31,19 @@ const Browse = () => {
         setIsEnd(true);
         return;
       }
-      if(players) {
-
-      setPlayers([...players, ...res.data.data]);
+      if (players) {
+        setPlayers([...players, ...res.data.data]);
+      } else {
+        setPlayers(res.data.data);
       }
-      else {
-      setPlayers(res.data.data);
-      }
-
+  
       setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchPlayers();
