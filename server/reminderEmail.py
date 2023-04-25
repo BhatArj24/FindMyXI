@@ -20,3 +20,5 @@ for doc in collection.find({"isPlayer": True}):
 
 for email in emails:
     print(email)
+
+print(len(emails))
