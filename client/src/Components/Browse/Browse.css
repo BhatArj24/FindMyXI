@@ -1,8 +1,7 @@
 .filter{
-    height: 75%;
-    width: 125px;
-    margin-left: 25%;
-    border-radius: 5px;
+    height: 100%;
+    width: 100px;
+    /* margin-left: 1%; */
     background-color: #355cdc;
     border: none;
     color: white;
@@ -10,10 +9,8 @@
 
 @media screen and (max-width: 600px) {
     .filter{
-        height: 75%;
+        height: 100%;
         width: 75px;
-        margin-left: 1%;
-        border-radius: 5px;
         background-color: #355cdc;
         border: none;
         color: white;

@@ -2,25 +2,26 @@
     margin: auto;
     margin-top: 1%;
     position:relative;
-    width:500px;
-    height:60px;
-    border: 4px solid gray;
-    padding: 0px 10px;
-    border-radius: 50px;
+    width:25%;
+    height:55px;
+    border: 1px solid gray;
+    /* padding:2px 1px; */
+
+    
 }
 
 .boxContainer:focus-within{
-    border: 4px solid #355cdc;
+    border: 1px solid #9bb1fa;
 }
 
 
 @media screen and (max-width: 600px) {
     .boxContainer{
         width: 75%;
-        height: 60px;
-        border: 4px solid #355cdc;
-        padding: 0px 10px;
-        border-radius: 50px;
+        height: 55px;
+        border: 1px solid gray;
+
+        
     }
 }
 
@@ -34,8 +35,7 @@
     border:none;
     height: 100%;
     width: 100%;
-    padding : 0px 5px;
-    border-radius: 50px;
+    padding:0px;
     font-size: 18px;
     color: #424242;
     font-weight: 500;
