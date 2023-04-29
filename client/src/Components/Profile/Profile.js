@@ -190,7 +190,7 @@ const Profile = () => {
     const dayOfWeek = now.getDay();
     const hour = now.getHours();
     var r = window.confirm("Are you sure you want to accept this request?");
-    if(dayOfWeek < 5 || (dayOfWeek === 5 && hour < 20)){
+    if(dayOfWeek < 5 || (dayOfWeek === 6 && hour < 23)){
     if(r){
       alert.status = "Accepted";
       if(alert.day === "Saturday"){
@@ -228,7 +228,7 @@ const Profile = () => {
       
     }
   }else{
-    toast.error("You can only accept requests before 8pm on Friday");
+    toast.error("You can only accept requests before 11 pm on Saturday");
     return;
   }
   };
