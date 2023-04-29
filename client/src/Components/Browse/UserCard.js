@@ -41,7 +41,7 @@ const UserCard = ({player}) => {
         toast.error("You must be logged into a manager account to pick a player");
         return;
       }
-      if(dayOfWeek>0 && (dayOfWeek<5 || (dayOfWeek===5 && hour<17))){
+      if(dayOfWeek>0 && (dayOfWeek<5 || (dayOfWeek===5 && hour<23))){
         if(pickSat){
           if(player.availableSat){
             if(!player.primaryTeamPickedSat && !player.secondaryTeamPickedSat){
@@ -141,7 +141,7 @@ const UserCard = ({player}) => {
       saveChanges("manager");
       setShow(false);
       } else{
-        toast.error("You can only request players Monday through Friday 5pm");
+        toast.error("You can only request players Monday through Friday 11pm");
       }
     }
     
