@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar";
 import UserCard from "./UserCard";
 import "./Card.css";
+import searchIcon from './search.png'
 import axios from "axios";
 import "./Browse.css";
 import "./Loader.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Browse = () => {
-  const [players, setPlayers] = useState(null);
+  const [players, setPlayers] = useState();
   const [searchValue, setSearchValue] = useState("");
   const [filterType, setFilterType] = useState("role");
   const [isLoading, setIsLoading] = useState(true);
@@ -17,12 +18,13 @@ const Browse = () => {
   const [skip, setSkip] = useState(0);
   const [isEnd, setIsEnd] = useState(false);
 
+
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
   };
   const getPlayers = async () => {
     setSkip(players?.length);
-    const url = `https://findmyxi.onrender.com/api/players?skip=${skip}&filterType=${filterType}&searchValue=${searchValue}&availableSaturday=${availableSaturday}&availableSunday=${availableSunday}`;
+    const url = `http://localhost:8080/api/players?skip=${skip}&filterType=${filterType}&searchValue=${searchValue}&availableSaturday=${availableSaturday}&availableSunday=${availableSunday}`;
     setIsLoading(true);
     try {
       const res = await axios.get(url);
@@ -43,11 +45,33 @@ const Browse = () => {
       setIsLoading(false);
     }
   };
-  
+
+  const getPlayersOnSearch = async () => {
+    const url = `http://localhost:8080/api/players?skip=${skip}&filterType=${filterType}&searchValue=${searchValue}&availableSaturday=${availableSaturday}&availableSunday=${availableSunday}`;
+    setIsLoading(true);
+    setPlayers(null);
+    try {
+      const res = await axios.get(url);
+      if (res.data.data.length < 8) {
+        setPlayers([...res.data.data]);
+        setIsEnd(true);
+        return;
+      }
+      setPlayers([...res.data.data]);
+
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     fetchPlayers();
   }, [skip]);
+
   const fetchPlayers = async () => {
     await getPlayers();
   };
@@ -55,24 +79,6 @@ const Browse = () => {
   const renderUsers = (
     players &&
     players
-      .filter((player) =>
-        filterType === "name"
-          ? player.name.toLowerCase().includes(searchValue.toLowerCase())
-          : filterType === "role"
-          ? player.role.toLowerCase().includes(searchValue.toLowerCase())
-          : player.primaryTeam.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      .filter((player) => {
-        if (availableSaturday && availableSunday) {
-          return player.availableSat === true && player.availableSun === true;
-        } else if (availableSaturday) {
-          return player.availableSat === true;
-        } else if (availableSunday) {
-          return player.availableSun === true;
-        } else {
-          return true;
-        }
-      })
       .map((player) => <UserCard key={player._id} player={player} />)
   );
 
@@ -81,39 +87,44 @@ const Browse = () => {
       <NavBar />
       <div className="flex flex-col lg:flex-row">
         <div className="boxContainer">
-          <table className="elementsContainer">
-            <tr>
-              <td>
-                <input
-                  type="text"
-                  placeholder="Fliter by..."
-                  className="search"
-                  value={searchValue}
-                  onChange={handleSearchChange}
-                ></input>
-              </td>
-
-              <td>
-                <select
-                  className="filter"
-                  value={filterType}
-                  onChange={(e) => {
-                    setFilterType(e.target.value);
-                  }}
-                >
-                  <option className="option" value="role">
-                    Role
-                  </option>
-                  <option className="option" value="name">
-                    Name
-                  </option>
-                  <option className="option" value="primaryTeam">
-                    Primary Team
-                  </option>
-                </select>
-              </td>
-            </tr>
-          </table>
+          <div className="grid grid-cols-4 gap-4 elementsContainer">
+            <div>
+              <select
+                className="filter font-bold text-lg"
+                value={filterType}
+                onChange={(e) => {
+                  setFilterType(e.target.value);
+                }}
+              >
+                <option className="option" value="role">
+                  Role
+                </option>
+                <option className="option" value="name">
+                  Name
+                </option>
+                <option className="option" value="primaryTeam">
+                  Primary Team
+                </option>
+              </select>
+            </div>
+            <div className="col-span-2">
+              <input
+                type="text"
+                placeholder="Search"
+                className="search"
+                value={searchValue}
+                onChange={handleSearchChange}
+              ></input>
+            </div>
+            <div className="col-span-1">
+              <div className="w-4/5 h-full float-right">
+              <button className="bg-slate-200 w-full h-full" onClick={getPlayersOnSearch}>
+                <img src={searchIcon} style={{width:"20px"}} className="m-auto"></img>
+              </button>
+              </div>
+              
+            </div>
+          </div>
         </div>
         <div className="bg-blue-700 text-white rounded-md p-3 mt-2 mx-3 lg:mr-8">
           <div>
