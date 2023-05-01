@@ -122,7 +122,7 @@ const Browse = () => {
                   Name
                 </option>
                 <option className="option" value="primaryTeam">
-                  Primary Team
+                  Team
                 </option>
               </select>
             </div>
