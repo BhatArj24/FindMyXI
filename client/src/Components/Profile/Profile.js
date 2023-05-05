@@ -132,7 +132,7 @@ const Profile = () => {
     const dayOfWeek = now.getDay();
     const hour = now.getHours();
     if(type==="availability"){
-      if(dayOfWeek > 0 && (dayOfWeek < 5)) {
+      if(dayOfWeek > 0 && (dayOfWeek < 7)) {
         try {
           const url = "https://findmyxi.onrender.com/api/setup";
           const { data: res } = await axios.post(url, profile);
@@ -143,7 +143,7 @@ const Profile = () => {
           console.log(err);
         }
       } else{
-        toast.error("You can only change availability between Monday and Thursday");
+        toast.error("You can only change availability between Monday and Saturday");
         return;
       }
     }
@@ -190,7 +190,7 @@ const Profile = () => {
     const dayOfWeek = now.getDay();
     const hour = now.getHours();
     var r = window.confirm("Are you sure you want to accept this request?");
-    if(dayOfWeek < 5 || (dayOfWeek === 6 && hour < 23)){
+    if(dayOfWeek < 6 || (dayOfWeek === 6 && hour < 23)){
     if(r){
       alert.status = "Accepted";
       if(alert.day === "Saturday"){
